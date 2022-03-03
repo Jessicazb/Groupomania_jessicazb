@@ -1,12 +1,11 @@
 import './styles/settings.scss';
-import React from "react"
-import Routes  from "./components/Routes";
+import React from "react";
+import Home from './pages/Home';
+
 
 const App = () =>{
   return (
-    <div>
-    <Routes/>
-    </div>
+   <Home></Home>
   );
 };
 
