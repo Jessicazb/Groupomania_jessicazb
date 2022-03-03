@@ -5,10 +5,11 @@ function PostCard({ post }){
   return (
     <div className='card-1'>
     <div className='card-header'>card header
-    <Avatar />
+    <Avatar alt="Jéssica Azevedo" src="./images/avatar/avatar.jpg" />
     </div>
     <div className='card-content'> card content
-      <h1>{post.description}</h1>
+      <h1>{post.title}</h1>
+      <p>{post.description}</p>
     </div>
     <div className='card-actions'>card actions</div>
       </div>

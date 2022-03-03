@@ -15,7 +15,7 @@ description: 'Le meilleur jus de mais du monde!',
 image: '/images/Posts/Peru.jpeg'
 },
 {
-id:1,
+id:2,
 autor: {
 name: 'Jéssica Azevedo',
 username: 'Jessicazb',
