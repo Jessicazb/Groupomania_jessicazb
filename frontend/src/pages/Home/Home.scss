@@ -34,7 +34,7 @@ padding: 24px;
 margin-left:180px;
 margin-top: 70px;
 border-radius: 15px;
-border: solid 2px;
+border: solid 1px;
 border-color: rgb(106, 148, 199);
 }
 .card-1{
@@ -42,7 +42,7 @@ border-color: rgb(106, 148, 199);
    width: 100%;
    height: auto;
    border-radius: 15px;
-   margin-top: 30px;
+   margin-top: 10px;
    border:solid 1px;
    border-color: rgb(106, 148, 199);
 .card-header{
@@ -68,6 +68,7 @@ border-color: rgb(106, 148, 199);
 p{
     font-size: 15px;
     padding-top: 10px;
+    letter-spacing: 0.5px;
 }
 img{
     height: 300px;

@@ -10,7 +10,7 @@ function Header (){
         <img src="../images/logo/icon-left-font.png" alt="Logo Goupomania"></img>
         </div>
         <div className="flex-items-header">
-        <Button variant="contained" color="secondary">New post</Button>
+        <Button variant="contained" color="secondary">Publier</Button>
         <Avatar src="/broken-image.jpg" className='avatar'/>
         </div>
 
