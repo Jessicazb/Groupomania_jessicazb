@@ -20,7 +20,29 @@ flex-direction: column;
 margin: 64px 32px;
 align-items: center;
 .avatar{
+background-color: rgb(233, 50, 50);
+}
+}
+.connect-form{
+margin-left: 50px;
+input{
+    height: 35px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.button{
     background-color: rgb(233, 50, 50);
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;   
+}
+}
+.pos-form{
+    margin-left: 50px;
+a{
+    text-decoration: none;
+    color: black;
 }
 }
 }

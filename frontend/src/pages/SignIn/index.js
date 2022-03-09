@@ -2,32 +2,50 @@ import React from "react";
 import './SigIn.scss';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import axios from "axios"
-import { useState } from "react"
+import {useNavigate} from "react-router-dom"
+import { useForm } from "react-hook-form";
+import axios from "../../utils/axios";
+import { useState } from "react";
 
 
 function SigIn() {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [errorMessage, setErrorMessage] = useState();
-    
-    const handleSignIn = (e) => {
-        e.preventDefault();
-    // appel à l'API
-        axios
-            .post("http://localhost:3000/api/auth/login", { email, password })
-            .then((res) => {
-                window.localStorage.setItem("token", res.data.token);
-                window.localStorage.setItem("userId", res.data.userId);
-                window.localStorage.setItem("is_admin", res.data.is_admin);
-                window.location = "/Home";
+    // useState
+    const [errorData, setErrorData] = useState("")
+
+    // registrer + err
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+
+    // usenavigate
+    const navigate = useNavigate()
+
+    const onSubmit = data => {
+        // axios
+        axios({
+            method: "POST",
+            url: `http://localhost:3000/api/auth/login`,
+            data: {
+                email: data.email,
+                password: data.password,
+            },
+        })
+            .then(res => {
+                let token = res.data.token
+                let userInfo = JSON.stringify(res.data)
+                console.log(token + userInfo)
+                localStorage.setItem("Token", token)
+                localStorage.setItem("userInfo", userInfo)
+                navigate("/Home")
             })
             .catch(err => {
-                console.log("Vous n'êtes pas inscrit!")
+                console.log(err)
+                setErrorData("Vous n'êtes pas inscrit!")
             })
-    };
+    }
+
     return (
         <div className="container">
             <div className="container-img">
@@ -40,37 +58,38 @@ function SigIn() {
                     </Avatar>
                     <h4>Login</h4>
                 </div>
-                <form className="form">
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Mail"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
+                <form onSubmit={handleSubmit(onSubmit)} className="connect-form">
+                    {/* email */}
+                    <label htmlFor="email">Email:</label>
+                    <br />
+                    <input
+                        type="email"
+                        {...register("email", {
+                            required: true,
+                            message: "Vous devez entrer une adresse mail valide",
+                        })}
                     />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Mot de passe"
+                    {errors.email && <span>{errors.email.message}</span>}
+                    <br />
+
+                    {/* password */}
+                    <label htmlFor="password">Mot de passe:</label>
+                    <br />
+                    <input
                         type="password"
-                        id="password"
-                        autoComplete="current-password"
+                        {...register("password", {
+                            required: true,
+                            pattern: {
+                                value: /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,64})$/,
+                                message:
+                                    "Votre mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
+                            },
+                        })}
                     />
-                    <Button
-                        fullWidth
-                        variant="contained"
-                        color="secondary"
-                        onClick={handleSignIn}
-                    >
-                        Connexion
-                    </Button>
+                    {errors.password && <span>{errors.password.message}</span>}
+                    <br />
+                    <input type="submit" value="Connection" className="button" />
+                    <span className="error-message">{errorData}</span>
                 </form>
                 <div className="pos-form">
                     <a href=""><p className="creation-compte">Pas encore de compte?</p></a>

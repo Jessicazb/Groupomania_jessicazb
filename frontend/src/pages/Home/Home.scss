@@ -1,88 +1,88 @@
 .header {
- background: white;
- width: 100%;
-
-.toolbar{
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 0 25px;
-}
-.logo_home img{
-    width: 35%; 
-}
-.flex-items-header{
- display: flex;
-}
-Button{
-    margin-right: 120px;
-}
-.avatar{
-    margin-right: 50px;
-}
-}
-.main{
-    display: flex;
+    background: white;
     width: 100%;
-    margin: 0 auto;
-    background: #e6a199;
-
-.feed{
-background:#E5E7E9 ;
-width: 70%;
-padding: 24px;
-margin-left:180px;
-margin-top: 70px;
-border-radius: 15px;
-border: solid 1px;
-border-color: #d88a81;
-}
-.card-1{
-   background: white;
-   width: 100%;
-   height: auto;
+   
+   .toolbar{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 0 25px;
+   }
+   .logo_home img{
+       width: 35%; 
+   }
+   .flex-items-header{
+    display: flex;
+   }
+   Button{
+       margin-right: 120px;
+   }
+   .avatar{
+       margin-right: 50px;
+   }
+   }
+   .main{
+       display: flex;
+       width: 100%;
+       margin: 0 auto;
+       background: #e6a199;
+   
+   .feed{
+   background:#E5E7E9 ;
+   width: 70%;
+   padding: 24px;
+   margin-left:180px;
+   margin-top: 70px;
    border-radius: 15px;
-   margin-top: 10px;
-   border:solid 1px;
+   border: solid 1px;
    border-color: #d88a81;
-.card-header{
-    display: flex;
-    height: auto;
-    padding-top: 20px;
-    padding-left: 10px;
-.nom-author{
-    margin-top: 10px;
-    margin-left: 5px;
-}
-.date{
-    margin-top: 30px;
-    position: relative;
-    right: 117px;
-    font-size: 11px;
-    color: gray;
-}
-}
-.card-content{
-    height: auto;
-    padding-left: 10px;
-p{
-    font-size: 15px;
-    padding-top: 10px;
-    letter-spacing: 0.5px;
-}
-img{
-    height: 300px;
-    padding-right: 10px;
-    padding-top: 10px;
-    width: 100%;
-    max-width: 100%;
-    object-fit: cover;
-}
-}
-.card-actions{
-    height: auto;
-    border-top:solid 1px;
-    border-color: #d88a81;
-}
-}
-}
+   }
+   .card-1{
+      background: white;
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      margin-top: 10px;
+      border:solid 1px;
+      border-color: #d88a81;
+   .card-header{
+       display: flex;
+       height: auto;
+       padding-top: 20px;
+       padding-left: 10px;
+   .nom-author{
+       margin-top: 10px;
+       margin-left: 5px;
+   }
+   .date{
+       margin-top: 30px;
+       position: relative;
+       right: 117px;
+       font-size: 11px;
+       color: gray;
+   }
+   }
+   .card-content{
+       height: auto;
+       padding-left: 10px;
+   p{
+       font-size: 15px;
+       padding-top: 10px;
+       letter-spacing: 0.5px;
+   }
+   img{
+       height: 300px;
+       padding-right: 10px;
+       padding-top: 10px;
+       width: 100%;
+       max-width: 100%;
+       object-fit: cover;
+   }
+   }
+   .card-actions{
+       height: auto;
+       border-top:solid 1px;
+       border-color: #d88a81;
+   }
+   }
+   }
