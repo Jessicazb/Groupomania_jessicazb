@@ -22,7 +22,7 @@ function SigIn() {
     // usenavigate
     const navigate = useNavigate()
 
-    const onSubmit = data => {
+     const onSubmit = data => {
         // axios
         axios({
             method: "POST",
@@ -38,6 +38,7 @@ function SigIn() {
                 console.log(token + user)
                 localStorage.setItem("Token", token)
                 localStorage.setItem("user", user)
+                localStorage.getItem("user", user, "token", token)
                 navigate("/Home")
             })
             .catch(err => {
@@ -91,7 +92,7 @@ function SigIn() {
                     <span className="error-message">{errorData}</span>
                 </form>
                 <div className="pos-form">
-                    <a href=""><p className="creation-compte">Pas encore de compte?</p></a>
+                    <p className="creation-compte">Pas encore de compte?</p>
                 </div>
             </div>
         </div>
