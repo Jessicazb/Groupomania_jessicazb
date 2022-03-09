@@ -4,8 +4,8 @@ import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {useNavigate} from "react-router-dom"
 import { useForm } from "react-hook-form";
-import axios from "../../utils/axios";
 import { useState } from "react";
+import axios from "../../utils/axios";
 
 
 function SigIn() {
@@ -34,10 +34,10 @@ function SigIn() {
         })
             .then(res => {
                 let token = res.data.token
-                let userInfo = JSON.stringify(res.data)
-                console.log(token + userInfo)
+                let user = JSON.stringify(res.data)
+                console.log(token + user)
                 localStorage.setItem("Token", token)
-                localStorage.setItem("userInfo", userInfo)
+                localStorage.setItem("user", user)
                 navigate("/Home")
             })
             .catch(err => {
@@ -45,8 +45,7 @@ function SigIn() {
                 setErrorData("Vous n'êtes pas inscrit!")
             })
     }
-
-    return (
+     return (
         <div className="container">
             <div className="container-img">
                 <img src="./images/logo/icon.png" alt="Logo Goupomania"></img>

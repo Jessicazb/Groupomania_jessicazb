@@ -3,6 +3,12 @@ import { Button } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 
 function Header (){
+    // authentification user/avatar
+    const user = localStorage.getItem('user');
+    console.log(user);
+    if (user) {
+        return JSON.parse(user)
+    } 
     return (
     <header className="header">
     <div className="toolbar">
@@ -11,7 +17,7 @@ function Header (){
         </div>
         <div className="flex-items-header">
         <Button variant="contained" color="secondary">Publier</Button>
-        <Avatar src="/broken-image.jpg" className='avatar'/>
+        <Avatar src={user && user.avatar} className='avatar'/>
         </div>
 
     </div>
