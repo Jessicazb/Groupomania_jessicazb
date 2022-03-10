@@ -1,6 +1,6 @@
-.container{
+.container {
 display: flex;
-.container-img{
+.container-img {
 height: 100vh;
 flex-basis: 50%;
 img{
@@ -23,23 +23,20 @@ align-items: center;
 background-color: rgb(233, 50, 50);
 }
 }
-.connect-form{
-margin-left: 50px;
+.inscription-form{
+    margin-left: 50px;
 input{
-    height: 35px;
-    width: 100%;
-    margin-bottom: 10px;
+height: 35px;
+width: 100%;
+margin-bottom: 10px;
 }
 .button{
-    background-color: rgb(233, 50, 50);
-    color: white;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;   
+background-color: rgb(233, 50, 50);
+color: white;
+font-size: 16px;
+border: none;
+cursor: pointer;   
 }
-}
-.pos-form{
-    margin-left: 50px;
 }
 }
 }

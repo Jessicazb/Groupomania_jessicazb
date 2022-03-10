@@ -3,7 +3,6 @@ import axios from "axios"
 import {useState} from "react"
 import {useForm} from "react-hook-form"
 import Avatar from '@material-ui/core/Avatar';
-import { use } from 'bcrypt/promises';
 
 
 const PostCard = props => {
@@ -66,12 +65,8 @@ const PostCard = props => {
   return (
     <div>
     <form onSubmit={handleSubmit(onSubmit)} className="post-form">
-      <div className="column1">
-      <Avatar />
-      <span className='nom-author'>{use.name}</span>
-        <label htmlFor="text_content" className="text_content_label">
-          Quoi de neuf ?
-        </label>
+      <div className="haeder-post">
+      <Avatar className='avatar'/>
         <br />
         <textarea
           row={2}
@@ -84,25 +79,25 @@ const PostCard = props => {
                 "Vous devez créer un post de 10 caractères au minimum !",
             },
             maxLength: {
-              value: 10000,
+              value: 500,
               message: "Vous êtes au maximum de caractères pour ce post !",
             },
           })}
         />
-        {errors.text_content && <span>{errors.text_content.message}</span>}
+        {errors.text_content && <span className='error-msg'>{errors.text_content.message}</span>}
       </div>
-      <div className="column2">
-        <input
+      <div className="image-post">
+        <input className='fichier-post'
           type="file"
           id="imageUrl"
           name="file"
           accept=".jpg, .jpeg, .png, .gif"
           onChange={e => handleImage(e)}
         />
-        <input className="post-button button" type="submit" value="Poster" />
+        <input className="button-post" type="submit" value="Publier" />
       </div>
 
-      <div className="preview-container">
+      <div className="message-post">
         <p>
           {emptyMessage && "Veuillez publiez un message et/ou une image !"}
         </p>

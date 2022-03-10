@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom"
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import axios from "../../utils/axios";
+import {Link} from 'react-router-dom';
 
 
 function SigIn() {
@@ -92,7 +93,7 @@ function SigIn() {
                     <span className="error-message">{errorData}</span>
                 </form>
                 <div className="pos-form">
-                    <p className="creation-compte">Pas encore de compte?</p>
+                <Link to = "/sign-Up">Pas encore de compte?</Link>
                 </div>
             </div>
         </div>

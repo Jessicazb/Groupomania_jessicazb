@@ -20,69 +20,85 @@
    .avatar{
        margin-right: 50px;
    }
-   }
-   .main{
-       display: flex;
-       width: 100%;
-       margin: 0 auto;
-       background: #e6a199;
+ 
+}
+.main{
+    display: flex;
+    width: 100%;
+    height: 700px;
+    margin: 0 auto;
+    background: #e6a199;
    
-   .feed{
+.feed{
    background:#E5E7E9 ;
    width: 70%;
+   height: auto;
    padding: 24px;
    margin-left:180px;
    margin-top: 70px;
    border-radius: 15px;
    border: solid 1px;
    border-color: #d88a81;
-   }
-   .card-1{
-      background: white;
-      width: 100%;
-      height: auto;
-      border-radius: 15px;
-      margin-top: 10px;
-      border:solid 1px;
-      border-color: #d88a81;
-   .card-header{
-       display: flex;
-       height: auto;
-       padding-top: 20px;
-       padding-left: 10px;
-   .nom-author{
-       margin-top: 10px;
-       margin-left: 5px;
-   }
-   .date{
-       margin-top: 30px;
-       position: relative;
-       right: 117px;
-       font-size: 11px;
-       color: gray;
-   }
-   }
-   .card-content{
-       height: auto;
-       padding-left: 10px;
-   p{
-       font-size: 15px;
-       padding-top: 10px;
-       letter-spacing: 0.5px;
-   }
-   img{
-       height: 300px;
-       padding-right: 10px;
-       padding-top: 10px;
-       width: 100%;
-       max-width: 100%;
-       object-fit: cover;
-   }
-   }
-   .card-actions{
-       height: auto;
-       border-top:solid 1px;
-       border-color: #d88a81;
-   }
-   }
-   }
+.post-form{
+    height: auto;
+    background-color: white;
+    border-radius: 5px;
+}
+.header-post{
+    display: flex;
+}
+.avatar{
+    margin-left: 10px;
+    width: 7%;
+    height: 55px;
+    position: relative;
+    top: 50px;
+}
+textarea{
+    width: 85%;
+    height: auto;
+    border-radius: 5px;
+    margin-left: 90px;
+    position: relative;
+    bottom: 10px;
+}
+.text_content_input{
+    font-size: 16px;
+}
+.error-msg{
+    color: rgb(233, 50, 50);
+    margin-left: 90px;
+    font-size: 13px;
+    position: relative;
+    bottom: 10px;
+}
+.image-post{
+   margin-left: 90px; 
+}
+.button-post{
+    width: 15%;
+    height: 25px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(233, 50, 50);
+    color: white;
+}
+.message-post{
+    font-size: 13px;
+    color:  rgb(233, 50, 50);
+    margin-left: 90px;
+}
+h1{
+    font-size: 20px;
+    padding-top: 20px;
+}
+.getAll-Post{
+    height: 350px;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 5px;    
+}
+}
+}
+
