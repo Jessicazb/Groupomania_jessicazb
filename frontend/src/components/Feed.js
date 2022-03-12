@@ -13,7 +13,7 @@ function Feed() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:3000/api/posts/", {
+            .get("http://localhost:4200/api/posts/", {
                 headers: {
                     "x-access-token": Token,
                 },
@@ -23,7 +23,7 @@ function Feed() {
                 setData(res.data)
             })
     }, [Token, setData, userId])
-    const prenomUser = JSON.parse(localStorage.getItem("user")).prenom
+    const nomUser = JSON.parse(localStorage.getItem("user")).prenom
     const posts = () => {
         window.location.reload()
     }

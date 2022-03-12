@@ -1,5 +1,6 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
+import {Link} from 'react-router-dom';
 
 function Header (){
     // authentification user/avatar
@@ -11,11 +12,11 @@ function Header (){
     return (
     <header className="header">
     <div className="toolbar">
-        <div className="logo_home">
-        <img src="../images/logo/icon-left-font.png" alt="Logo Goupomania"></img>
+   <div className="logo_home">
+   <Link to = "/"><img src="../images/logo/icon-left-font.png" alt="Logo Goupomania"></img></Link>
         </div>
         <div className="flex-items-header">
-        <Avatar src={user && user.avatar} className='avatar'/>
+        <Link to = "/Profil"><Avatar src={user && user.avatar} className='avatar'/></Link>
         </div>
 
     </div>

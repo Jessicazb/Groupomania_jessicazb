@@ -24,7 +24,7 @@ function SignUp () {
     const onSubmit = data => {
         axios({
             method: "POST",
-            url: `http://localhost:3000/api/auth/sign-Up`,
+            url: `http://localhost:4200/api/auth/signup`,
             data: {
                 prenom: data.prenom,
                 nom: data.nom,
@@ -38,6 +38,9 @@ function SignUp () {
                 localStorage.setItem("Token", token)
                 localStorage.setItem("user", user)
                 navigate("/home")
+               if(user){
+                   return res.status(200);
+               }
             })
             .catch(error => {
                 console.log(error)

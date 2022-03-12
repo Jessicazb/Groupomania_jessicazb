@@ -27,7 +27,7 @@ function SigIn() {
         // axios
         axios({
             method: "POST",
-            url: `http://localhost:3000/api/auth/login`,
+            url: `http://localhost:4200/api/auth/login`,
             data: {
                 email: data.email,
                 password: data.password,
@@ -93,7 +93,7 @@ function SigIn() {
                     <span className="error-message">{errorData}</span>
                 </form>
                 <div className="pos-form">
-                <Link to = "/sign-Up">Pas encore de compte?</Link>
+                <Link to = "/signup">Pas encore de compte?</Link>
                 </div>
             </div>
         </div>

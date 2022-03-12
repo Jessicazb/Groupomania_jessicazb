@@ -7,6 +7,8 @@ const postSchema = /*mongoose.Schema*/({
   imageUrl: { type: String },
   likes: { type: Number, default: 0 },
   dislikes: { type: Number, default: 0 },
+  // comments 
+  comments: { type: [String] },
   usersLiked: { type: [String] },
   usersDisliked: { type: [String] },
 });

@@ -3,14 +3,18 @@ const bcrypt = require('bcrypt');
 // package pour la création de token d'authentification
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+//récuperation du schema users db
+const userDb = User.users // à voir
 
 // création d'un compte
 exports.signup = (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
+        prenom: req.body.prenom,
+        nom: req.body.nom,
         email: req.body.email,
-        password: hash
+        password: hash,
       });
       user.save()
         .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -33,6 +37,10 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({
             userId: user._id,
+            prenom: user.prenom,
+            nom: user.nom,
+            email: user.email,
+            admin: user.admin,
             token: jwt.sign(
               { userId: user._id },
               'RANDOM_TOKEN_SECRET',

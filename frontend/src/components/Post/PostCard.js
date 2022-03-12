@@ -44,7 +44,7 @@ const PostCard = props => {
       // POST
       await axios({
         method: "POST",
-        url: "http://localhost:3000/api/posts",
+        url: "http://localhost:4200/api/posts",
         headers: {
           "x-access-token": localStorage.getItem("Token"),
         },

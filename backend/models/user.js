@@ -1,13 +1,21 @@
-// Schéma de données users
-//const mongoose = require('mongoose');
-//const uniqueValidator = require('mongoose-unique-validator');
+const Sequelize = require('sequelize');
+const db = require('../config/db');
 
-const userSchema = /*mongoose.Schema*/({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+const userSchema = db.define('user',{
+  id:{
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+  nom:{type: Sequelize.STRING, allowNull: false},
+  prenom:{type: Sequelize.STRING, allowNull: false},
+  email: { type: Sequelize.STRING, allowNull: false, unique: true },
+  password: { type: Sequelize.STRING, allowNull: false, unique:true},
+  isAdmin: {type: Boolean, allowNull: false, default:0}
+  // user isAdmin  -- auth 
 });
 
-//userSchema.plugin(uniqueValidator);
-
-//module.exports = mongoose.model('User', userSchema);
+// User.sync({alter:true})
+module.exports = userSchema;
 

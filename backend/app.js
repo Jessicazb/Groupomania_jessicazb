@@ -4,18 +4,6 @@ const postRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
 const path = require('path');
 
-/*const mongoose = require('mongoose');
-require('dotenv').config();
-
-// connexion avec la base de donnée
-mongoose.connect(process.env.MONGODB_URL,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
-*/
 // middleware pour l'application accéder l'API
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');

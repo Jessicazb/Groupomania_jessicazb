@@ -43,6 +43,8 @@
     height: auto;
     background-color: white;
     border-radius: 5px;
+    border: solid 1px;
+   border-color: #d88a81;
 }
 .header-post{
     display: flex;
@@ -97,7 +99,9 @@ h1{
     height: 350px;
     margin-top: 20px;
     background-color: white;
-    border-radius: 5px;    
+    border-radius: 5px;
+    border: solid 1px;
+   border-color: #d88a81;    
 }
 }
 }
