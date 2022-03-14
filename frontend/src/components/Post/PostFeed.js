@@ -12,12 +12,12 @@ require ("dayjs/locale/fr")
 
 function PostFeed (props){
     const {post} = props
-
+    const [DeleteIconTrash, setDeleteIconTrash] = useState(false)
 
     return(
         <div>
         <li className="card-feed">
-        <div><Avatar className='avatar-feed' src ={post.userId.imageUrl}/>
+        <div><Avatar className='avatar-feed' src ={post.user.imageUrl}/>
         {post.users.prenom} {post.users.nom} {dayjs(post.createdAt).locale("fr").fromNow()}
         </div>
         <div className="post-feed">
@@ -33,9 +33,11 @@ function PostFeed (props){
         <div className="footer-post-feed">
        <FavoriteIcon className="favorite-icon"/>
        <MessageIcon className="message-icon"/>
-       {DeleteIcon && (
+       <span>
+       {DeleteIconTrash && (
            <DeleteIcon className="delete-icon"/>
        )}
+       </span>
         </div>
 
         </li>

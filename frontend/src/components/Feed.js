@@ -1,11 +1,12 @@
 import React from 'react';
-import { useState, useEffect } from "react"
-import axios from "axios"
+import { useState, useEffect } from "react";
+import axios from "axios";
 import PostCard from '../components/Post/PostCard';
 import PostFeed from '../components/Post/PostFeed';
 
-/*
+
 function Feed() {
+   /* 
     const [data, setData] = useState([])
 
     const Token = localStorage.getItem("Token")
@@ -13,8 +14,7 @@ function Feed() {
     const userId = JSON.parse(localStorage.getItem("user")).id
 
     useEffect(() => {
-        axios
-            .get("http://localhost:4200/api/posts/", {
+        axios.get("http://localhost:4200/api/posts/", {
                 headers: {
                     "x-access-token": Token,
                 },
@@ -24,47 +24,27 @@ function Feed() {
                 setData(res.data)
             })
     }, [Token, setData, userId])
-    const nomUser = JSON.parse(localStorage.getItem("user")).prenom
-    const posts = () => {
+    const addnewpost = () => {
         window.location.reload()
     }
-*/
-const posts = [
-    {
-    id:"",
-    author: {
-    name: '',
-    username: '',
-    avatar: ''
-    },
-    date: '',
-    description: '',
-    image: ''
-    },
-    ];
-    function Feed (){
-       return(
+
+    ajout dans PostCard = <PostCard addPost={addnewpost}></PostCard>
+    
+ */
+    return(
         <main className="main">
         <div className="feed">
         <div className='posts'>
-        {
-            posts.map(post => (
-                <PostCard key={post.id} post={post}/>
-            ))
-        }
+        <PostCard /> 
         </div>
         <h1> Nouvelles publications:</h1>
-        <div className='getAll-Post'>
-        {
-           // posts.map(post => (
-                //<PostFeed key={post.id} post={post}/>
-            //))
-        }
-        </div>
+        <ul className="getAll-Post">
+        
+      </ul>
         </div>
         </main>
-       ); 
-    };
+    ); 
+};
     
 
 export default Feed;
