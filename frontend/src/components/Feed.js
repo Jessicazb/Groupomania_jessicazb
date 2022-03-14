@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from "react"
 import axios from "axios"
 import PostCard from '../components/Post/PostCard';
+import PostFeed from '../components/Post/PostFeed';
 
 /*
 function Feed() {
@@ -54,7 +55,11 @@ const posts = [
         </div>
         <h1> Nouvelles publications:</h1>
         <div className='getAll-Post'>
-         hello
+        {
+           // posts.map(post => (
+                //<PostFeed key={post.id} post={post}/>
+            //))
+        }
         </div>
         </div>
         </main>

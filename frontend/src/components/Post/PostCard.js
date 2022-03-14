@@ -5,7 +5,8 @@ import {useForm} from "react-hook-form"
 import Avatar from '@material-ui/core/Avatar';
 
 
-const PostCard = props => {
+function PostCard (props){
+
   const {
     register,
     handleSubmit,
@@ -16,7 +17,7 @@ const PostCard = props => {
   const [file, setFile] = useState(false)
   const [emptyMessage, setEmptyMesssage] = useState(null)
 
-  //  Récuépraiton des infos img
+  //  Récupéraiton des infos img
   const handleImage = e => {
     setPostImage(URL.createObjectURL(e.target.files[0]))
     setFile(e.target.files[0])
