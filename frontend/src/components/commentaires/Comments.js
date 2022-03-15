@@ -1,11 +1,13 @@
 import React from "react"
 import axios from "axios"
+import {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 function Comments (props){
   const {comments} = props
-  
+  const [DeleteIconTrash, setDeleteIconTrash] = useState(false)
+ 
     
 return(
     <div className="card-comments">
@@ -17,10 +19,12 @@ return(
     <p className="comments-text-p">{comments.content}</p>
     </div>
     <span>
-    {DeleteIconTrash && (
+    { DeleteIconTrash && (
            <DeleteIcon className="delete-icon-comments"/>
-       )}
+    )}
     </span>
     </div>
 )
 }
+
+export default Comments;
