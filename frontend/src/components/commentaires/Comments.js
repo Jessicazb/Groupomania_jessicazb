@@ -8,6 +8,9 @@ function Comments (props){
   const {comments} = props
   const [DeleteIconTrash, setDeleteIconTrash] = useState(false)
  
+  const deleteHandle = () => {
+    // axios Delete
+  }
     
 return(
     <div className="card-comments">
@@ -20,7 +23,12 @@ return(
     </div>
     <span>
     { DeleteIconTrash && (
-           <DeleteIcon className="delete-icon-comments"/>
+           <DeleteIcon className="delete-icon-comments"
+           onClick={() => {
+            if (window.confirm("Voulez-vous supprimer ce commentaire ?")) {
+                 deleteHandle()
+            }
+        }}/>
     )}
     </span>
     </div>

@@ -16,13 +16,15 @@ function PostFeed(props) {
     const { post } = props
     const [DeleteIconTrash, setDeleteIconTrash] = useState(false)
     const [dataComment, setDataComment] = useState([])
-    const [Comments, setComments] = useState(false)
+    const [showComments, setshowComments] = useState(false)
 
+    // éxecuter le bloc de commentaires avec useEffect
     const allComments = post.allComments
       useEffect(() => {
       setDataComment(allComments)
-  }, [allComments])
+    }, [allComments])
 
+   
 
     const addComment = newComment => {
         setDataComment(dataComment.concat(newComment))
@@ -31,6 +33,22 @@ function PostFeed(props) {
         let updateComment = dataComment.filter(i => i.id !== commentToDelete.id)
         setDataComment(updateComment)
     }
+    
+    // récuperatio  des données dans le local storage
+    const user = JSON.parse(localStorage.getItem("user"))
+    const users_id = user.id
+    const users_admin = user.admin
+
+    // Delete Post
+    const deleteHandle = () => {
+
+    }
+
+    // like Post
+    const likeHandle =() =>{
+
+    }
+  
     return (
         <div>
             <li className="card-feed">
@@ -48,14 +66,14 @@ function PostFeed(props) {
                     )}
                 </div>
                 <div className="footer-post-feed">
-                    <FavoriteIcon className="favorite-icon" />
+                    <FavoriteIcon className="favorite-icon" onClick={likeHandle} />
                     <MessageIcon className="message-icon" />
                     <span>
                         {DeleteIconTrash && (
                             <DeleteIcon className="delete-icon"
                                 onClick={() => {
                                     if (window.confirm("Voulez-vous supprimer ce post ?")) {
-                                        // handleDelite()
+                                         deleteHandle()
                                     }
                                 }} />
                         )}
@@ -65,7 +83,7 @@ function PostFeed(props) {
                     <NewComment postId={post.id} newComment={addComment} />
                 </div>
             <div className="all-comments">
-            { Comments && dataComment.map((allComments, i) => (
+            { showComments && dataComment.map((allComments, i) => (
                <Comments className="comments"
                allComments={allComments}
                key={i}/>
