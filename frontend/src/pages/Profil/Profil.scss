@@ -1,0 +1,47 @@
+.container-profil{
+    background-color: #e6a199;
+    height: 533px;
+
+.form-profil{
+    border: solid 2px;
+    border-radius: 15px;
+    border-color:#d88a81;
+    width: 60%;
+    height: 400px;
+    margin-left: 230px;
+    position: relative;
+    top: 100px;
+    background-color: white;
+.avatar{
+    margin-left: 350px;
+    margin-top: 30px;
+    width: 8%;
+    height: 60px;
+    cursor: pointer;
+}
+input{
+    width: 90%;
+    margin-top: 5px;
+    height: 35px;
+    margin-left: 35px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: solid 1px;
+}
+.button-profil{
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    background-color: rgb(233, 50, 50);
+    border: none;
+    border-radius: 5px;
+}
+.button-profil:hover{
+    color: #d88a81;
+    background-color:black;
+}
+label{
+    margin-left: 35px;
+}
+}
+}
