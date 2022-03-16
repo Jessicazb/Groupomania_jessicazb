@@ -15,8 +15,8 @@ function Comments (props){
 return(
     <div className="card-comments">
     <div className="card-comments-header">
-    <Avatar src ={comments.user.imageUrl}/>
-    {comments.users.prenom} {comments.users.nom}
+    <Avatar src ={comments.author.imageUrl}/>
+    {comments.author.prenom} {comments.author.nom}
     </div>
     <div className="comments-text">
     <p className="comments-text-p">{comments.content}</p>

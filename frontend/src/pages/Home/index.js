@@ -4,6 +4,7 @@ import Feed from "../../components/Feed";
 import './Home.scss';
 
 
+
 function Home() {
     return (
         <div>

@@ -13,13 +13,14 @@ require("dayjs/locale/fr")
 //const relativeTime = require ("dayjs/plugin/relaiveTime");
 
 function PostFeed(props) {
+    
     const { post } = props
     const [DeleteIconTrash, setDeleteIconTrash] = useState(false)
     const [dataComment, setDataComment] = useState([])
     const [showComments, setshowComments] = useState(false)
 
     // éxecuter le bloc de commentaires avec useEffect
-    const allComments = post.allComments
+    /*const allComments = post.allComments
       useEffect(() => {
       setDataComment(allComments)
     }, [allComments])
@@ -37,8 +38,8 @@ function PostFeed(props) {
     // récuperatio  des données dans le local storage
     const user = JSON.parse(localStorage.getItem("user"))
     const users_id = user.id
-    const users_admin = user.admin
-
+    const users_admin = user.isAdmin
+    
     // Delete Post
     const deleteHandle = () => {
 
@@ -46,17 +47,19 @@ function PostFeed(props) {
 
     // like Post
     const likeHandle =() =>{
-
+ 
     }
+    */
   
     return (
+    /*
         <div>
             <li className="card-feed">
-                <div><Avatar className='avatar-feed' src={post.user.imageUrl} />
-                    {post.users.prenom} {post.users.nom} {dayjs(post.createdAt).locale("fr").fromNow()}
+                <div><Avatar className='avatar-feed' src={post.author.imageUrl} />
+                    {post.author.prenom} {post.author.nom} {dayjs(post.createdAt).locale("fr").fromNow()}
                 </div>
                 <div className="post-feed">
-                    <p className="text-post">{post.text_content}</p>
+                    <p className="text-post">{post.content}</p>
                     {post.imageUrl && (
                         <img
                             src={post.imageUrl}
@@ -83,14 +86,16 @@ function PostFeed(props) {
                     <NewComment postId={post.id} newComment={addComment} />
                 </div>
             <div className="all-comments">
-            { showComments && dataComment.map((allComments, i) => (
+            { showComments && post.comments.map((allComments, i) => (
                <Comments className="comments"
                allComments={allComments}
                key={i}/>
             ))}
             </div>
             </li>
-        </div>
+        </div> 
+    */
+   <h1>Hello word!</h1>
     )
 }
 

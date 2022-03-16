@@ -75,7 +75,7 @@ return(
           {errors.email && <span>{errors.email.message}</span>}
           <br/>
           <input
-            className="button-profil "
+            className="button-profil"
             type="submit"
             value="Modifier"
           />
