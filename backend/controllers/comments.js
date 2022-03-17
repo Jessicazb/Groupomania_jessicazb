@@ -1,15 +1,14 @@
 const Comment = require('../models/comments')
-const db = require('../config/db');
-const userInfo = db.users
+const User = require('../models/user');
 
 // création d'un commentaire
-exports.createComment = async (req, res) => {
+exports.createComment = async (req, res, next) => {
     try {
-      const user = await userInfo.findOne({
+      const user = await User.findOne({
         attributes: ["nom", "prenom", "id"],
         where: {id: req.body.users_id},
       })
-      console.log("user trouvé", user.dataValues)
+      console.log("utilisateur trouvé", user.dataValues)
       const comment = await Comment.create({
         content: req.body.content,
         users_id: req.body.users_id,
@@ -23,7 +22,7 @@ exports.createComment = async (req, res) => {
     }
   }
   
-  // soupression d'un commentaire
+  // supression d'un commentaire
   exports.deleteComment = async (req, res) => {
     const comment = await Comment.destroy({where: {id: req.body.id}})
     res.status(200).json({comment, message: "Commentaire supprimé"})

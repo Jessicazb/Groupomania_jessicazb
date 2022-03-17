@@ -1,9 +1,8 @@
-"use strict"
-const {Model} = require("sequelize")
-module.exports = (sequelize, DataTypes) => {
-  const Comments = sequelize.define(
-    "comments",
-    {
+const { Model, DataTypes } = require("sequelize")
+
+class Comments extends Model {
+  static init(sequelize) {
+    super.init({
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -14,11 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       users_id: {type: DataTypes.INTEGER, allowNull: false},
       post_id: {type: DataTypes.INTEGER, allowNull: false},
     },
-
-    {
-      sequelize,
-      modelName: "Comments",
-    }
-  )
-  return Comments
+      {
+        sequelize
+      })
+  }
 }
+
+module.exports = Comments;

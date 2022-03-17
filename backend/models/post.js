@@ -1,10 +1,8 @@
-"use strict"
-const { Model } = require("sequelize")
-module.exports = (sequelize, DataTypes) => {
-  // défenir de correspondance entre un modéle et une table
-  const Posts = sequelize.define(
-    "posts",
-    {
+const { Model, DataTypes } = require("sequelize")
+
+class Posts extends Model {
+  static init(sequelize) {
+    super.init({
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -14,12 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       text_content: { type: DataTypes.STRING, allowNull: true },
       imageUrl: { type: DataTypes.STRING, allowNull: true },
       users_id: { type: DataTypes.INTEGER, allowNull: false },
-      likes: { type: DataTypes.INTEGER, allowNull: false },
     },
-    {
-      sequelize,
-      modelName: "Posts",
-    }
-  )
-  return Posts
+      {
+        sequelize
+      })
+  }
 }
+
+module.exports = Posts;

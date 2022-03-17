@@ -1,58 +1,96 @@
 // Logique métier de routes 
 const Post = require('../models/post');
 const fs = require('fs');
+const User = require('../models/user');
+const Comments = require('../models/comments');
 
 // création et ajout d'un post (POST)
-exports.createPost = (req, res, next) => {
-  const postObject = JSON.parse(req.body.post);
-  delete postObject._id;
-  const post = new Post({
-    ...postObject,
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-  });
-  post.save()
-    .then(() => res.status(201).json({ message: 'Post enregistré!' }))
-    .catch(error => res.status(400).json({ error }));
+exports.createPost = async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      attributes: ["nom", "prenom", "id"],
+      where: {id: req.body.user_id},
+    })
+    if (user !== null) {
+      console.log("user : ", user)
+      let imageUrl
+      if (req.file) {
+        console.log("filename : ", req.file.filename)
+        imageUrl = `http://localhost:4200/api/upload/${req.file.filename}`
+      } else {
+        imageUrl = null
+      }
+      const post = await Post.create({
+        users_id: req.body.user_id,
+        text_content: req.body.text_content,
+        imageUrl: imageUrl,
+      })
+      post.dataValues.users = user.dataValues
+      console.log("Post créé : ", post.dataValues)
+      res.status(201).json({post: post})
+    } else {
+      res.status(400).json({réponse: "L'utilisateur n'existe pas"})
+    }
+  } catch (error) {
+    return res.status(500).send({error: "Erreur serveur"})
+  }
 };
 
-// Modification d'un post (PUT)
-exports.modifyPost = (req, res, next) => {
-  const postObject = req.file ?
-    {
-      ...JSON.parse(req.body.post),
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    } : { ...req.body };
-  Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
-    .then(() => res.status(200).json({ message: 'Post modifié !' }))
-    .catch(error => res.status(400).json({ error }));
-};
 // Supression d'un post (DELETE)
-exports.deletePost = (req, res, next) => {
-  Post.findOne({ _id: req.params.id })
-    .then(post => {
-      const filename = post.imageUrl.split('/images/')[1];
+exports.deletePost = async (req, res, next) => {
+  try {
+    const post = await Post.findOne({where: {id: req.body.id}})
+    console.log("Post trouvé : ", post)
+    if (post.imageUrl) {
+      const filename = post.imageUrl.split("/images")[1]
+      console.log("Filename to Delete: ", filename)
       fs.unlink(`images/${filename}`, () => {
-        Post.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ message: 'Post supprimé !' }))
-          .catch(error => res.status(400).json({ error }));
-      });
-    })
-    .catch(error => res.status(500).json({ error }));
+        Post.destroy({where: {id: req.body.id}})
+        res.status(200).json({message: "Post et image supprimé"})
+      })
+    } else {
+      Post.destroy({where: {id: post.id}}, {truncate: true})
+      res.status(200).json({message: "Post supprimé"})
+    }
+  } catch (error) {
+    return res.status(500).send({error: "Erreur serveur"})
+  }
 };
-// Trouver un post par son id (GET)
-exports.getOnePost = (req, res, next) => {
-  Post.findOne({ _id: req.params.id })
-    .then(post => res.status(200).json(post))
-    .catch(error => res.status(404).json({ error }));
-};
+
 
 // Trouver tous les posts (GET)
 exports.getAllPost = (req, res, next) => {
-  Post.find()
-    .then(post => res.status(200).json(post))
-    .catch(error => res.status(400).json({ error }));
+  try {
+    Post.findAll({
+      attributes: ["id", "text_content", "imageUrl", "createdAt", "users_id"],
+      order: [["createdAt", "DESC"]],
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["prenom", "nom", "id"],
+        },
+        {
+          model: Comments,
+          include: [
+            {model: User, as: "user", attributes: ["nom", "prenom"]},
+          ],
+          as: "comments",
+          attributes: ["id", "content", "post_id", "users_id", "createdAt"],
+        },
+      ],
+    }).then(posts => {
+      console.log("Posts : ", posts)
+      res.json(posts)
+    })
+  } catch (error) {
+    return res.status(500).send({
+      error: "Une erreur est survenue lors de la récupération des posts ",
+    })
+  }
 };
 
+/*
 // Envoie de like et dislike (POST)
 exports.likesDislikes = (req, res, next) => {
   // likes = 1 (likes = +1)
@@ -99,3 +137,4 @@ exports.likesDislikes = (req, res, next) => {
     .catch((error) => res.status(404).json({ error }));
 
 };
+*/

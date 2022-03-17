@@ -3,13 +3,10 @@ const bcrypt = require('bcrypt');
 // package pour la création de token d'authentification
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-//récuperation du model users db
-const db = require('../config/db');
-const userInfo = db.users
 
 // création d'un compte
 exports.signup = async (req, res, next) => {
- await bcrypt.hash(req.body.password, 10)
+ const hash = await bcrypt.hash(req.body.password, 10)
   userInfo = {
   prenom: req.body.prenom,
   nom: req.body.nom,

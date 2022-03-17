@@ -8,5 +8,7 @@ const userCtrl = require('../controllers/user');
 
 router.post('/signup', validatePassword, userCtrl.signup);
 router.post('/login', tentativeConnexion.limiteur, userCtrl.login);
+router.put('/updateUser', userCtrl.updateUser);
+router.delete('/deleteUser', userCtrl.deleteUser);
 
 module.exports = router;
