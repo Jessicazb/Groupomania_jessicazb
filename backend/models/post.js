@@ -11,7 +11,9 @@ class Posts extends Model {
       },
       text_content: { type: DataTypes.STRING, allowNull: true },
       imageUrl: { type: DataTypes.STRING, allowNull: true },
+      comments: { type: DataTypes.INTEGER, allowNull: true, defaultValue: 0},
       users_id: { type: DataTypes.INTEGER, allowNull: false },
+      likes: {type: DataTypes.INTEGER, allowNull: true, defaultValue: 0}
     },
       {
         sequelize

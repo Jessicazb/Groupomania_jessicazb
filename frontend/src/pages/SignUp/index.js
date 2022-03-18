@@ -34,13 +34,11 @@ function SignUp () {
         })
             .then(res => {
                 let token = res.data.token
-                let user = JSON.stringify(res.data)
+                let userInfo = JSON.stringify(res.data)
                 localStorage.setItem("Token", token)
-                localStorage.setItem("user", user)
-                navigate("/home")
-               if(user){
-                   return res.status(200);
-               }
+                localStorage.setItem("userInfo", userInfo)
+                navigate("/Home")
+               
             })
             .catch(error => {
                 console.log(error)

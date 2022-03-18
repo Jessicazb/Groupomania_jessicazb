@@ -1,5 +1,6 @@
+// modele base de données
 module.exports = {
-  user: 'adm',
+  username: 'adm',
   password: 'hello',
   database: "Groupomania",
   host: 'localhost',

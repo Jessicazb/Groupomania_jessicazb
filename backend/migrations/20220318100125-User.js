@@ -1,8 +1,8 @@
-const { Model, TINYINT, DataTypes} = require("sequelize")
-
-class User extends Model {
-  static init(sequelize) {
-    super.init({
+'use strict';
+const { TINYINT, DataTypes, DATE } = require("sequelize")
+module.exports = {
+  async up (queryInterface, Sequelize) {
+    await queryInterface.createTable('users',{
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -15,12 +15,12 @@ class User extends Model {
       password: { type: DataTypes.STRING, allowNull: false, unique: true },
       avatar:{type: DataTypes.STRING, allowNull: true },
       admin: { type: TINYINT(0), allowNull: true, default: 0 },
-    },
-      {
-        sequelize
-      })
+      createdAt: {type:DATE, allowNull:true, default:null},
+      updatedAt: {type:DATE, allowNull:true, default:null}
+    })
+  },
+
+  async down (queryInterface, Sequelize) {
+    await queryInterface.dropTable('users');
   }
-}
-
-module.exports = User;
-
+};
