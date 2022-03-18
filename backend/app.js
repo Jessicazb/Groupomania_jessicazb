@@ -3,6 +3,7 @@ const app = express();
 const postRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
 const commentRoutes = require('./routes/comment');
+const likeRoutes = require('./routes/likes');
 const path = require('path');
 
 //connection avec la base de donnés
@@ -20,7 +21,8 @@ app.use(express.json());
 
 app.use('/api/post', postRoutes);
 app.use('/api/auth', userRoutes);
-app.use('api/comment', commentRoutes);
+app.use('/api/comment', commentRoutes);
+app.use('/api/likes', likeRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
