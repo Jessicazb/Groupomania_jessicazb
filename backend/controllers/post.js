@@ -62,6 +62,7 @@ exports.deletePost = async (req, res, next) => {
 exports.getAllPost = (req, res, next) => {
   try {
     Post.findAll({
+      
       attributes: ["id", "text_content", "imageUrl", "createdAt", "users_id"],
       order: [["createdAt", "DESC"]],
       include: [

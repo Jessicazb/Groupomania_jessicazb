@@ -47,17 +47,17 @@ function PostCard (props){
         method: "POST",
         url: "http://localhost:4200/api/posts",
         headers: {
-          "x-access-token": localStorage.getItem("Token"),
+          "Authorization": localStorage.getItem("Token"),
         },
         params: {userId: user_id},
         data,
       })
         .then(res => {
-          console.log(res.data.post)
+          
           props.addPost(res.data.post)
         })
         .catch(err => {
-          console.log(err)
+          
         })
     } else {
       setEmptyMesssage(true)

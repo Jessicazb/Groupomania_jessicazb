@@ -33,11 +33,14 @@ function SignUp () {
             },
         })
             .then(res => {
-                let token = res.data.token
+                localStorage.clear();
+                navigate("/sign-in")
+                /*let token = res.data.token
                 let userInfo = JSON.stringify(res.data)
+                localStorage.clear();
                 localStorage.setItem("Token", token)
-                localStorage.setItem("userInfo", userInfo)
-                navigate("/Home")
+                localStorage.setItem("userInfo", userInfo)*/
+                
                
             })
             .catch(error => {

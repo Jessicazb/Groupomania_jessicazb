@@ -7,7 +7,7 @@ function Header (){
     const user = localStorage.getItem('user');
     console.log(user);
     if (user) {
-        return JSON.parse(user)
+        //return JSON.parse(user)
     } 
     return (
     <header className="header">
@@ -16,7 +16,7 @@ function Header (){
    <Link to = "/"><img src="../images/logo/icon-left-font.png" alt="Logo Goupomania"></img></Link>
         </div>
         <div className="flex-items-header">
-        <Link to = "/Profil"><Avatar src={user && user.avatar} className='avatar'/></Link>
+        <Link to = "/Profil"><Avatar src={user.avatar} className='avatar'/></Link>
         </div>
 
     </div>

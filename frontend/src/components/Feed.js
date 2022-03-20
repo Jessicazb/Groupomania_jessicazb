@@ -7,18 +7,17 @@ import PostFeed from '../components/Post/PostFeed';
 
 
 function Feed() {
-    const [posts, setPosts] = useState([])
-   /*  
+    const [posts, setPosts] = useState([]) 
 
     const Token = localStorage.getItem("Token")
 
     const userId = JSON.parse(localStorage.getItem("user")).id
-
+    console.log(Token)
     useEffect(() => {
         // récuperation de tous les posts
         axios.get("http://localhost:4200/api/posts/", {
                 headers: {
-                    "x-access-token": Token,
+                    "Authorization": Token,
                 },
                 params: { userId: userId },
             })
@@ -29,19 +28,16 @@ function Feed() {
     const addnewpost = () => {
         window.location.reload()
     }
-
-    //ajout dans PostCard = <PostCard addPost={addnewpost}></PostCard>
     
  
-    */
     return(
         <main className="main">
             <div className="feed">
                 <div className='posts'>
-                    <PostCard /> 
+                <PostCard addPost={addnewpost}></PostCard>
                 </div>
                 <h1> Nouvelles publications:</h1>
-                {console.log(posts)}
+                
                 {posts.map(post =>( 
                     <ul className="getAll-Post"> 
                         <PostFeed post />

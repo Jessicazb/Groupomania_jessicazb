@@ -20,7 +20,7 @@ function PostFeed(props) {
     const [showComments, setshowComments] = useState(false)
 
     // éxecuter le bloc de commentaires avec useEffect
-    /*const allComments = post.allComments
+    const allComments = post.allComments
       useEffect(() => {
       setDataComment(allComments)
     }, [allComments])
@@ -49,10 +49,10 @@ function PostFeed(props) {
     const likeHandle =() =>{
  
     }
-    */
+    
   
     return (
-    /*
+    
         <div>
             <li className="card-feed">
                 <div><Avatar className='avatar-feed' src={post.author.imageUrl} />
@@ -94,8 +94,8 @@ function PostFeed(props) {
             </div>
             </li>
         </div> 
-    */
-   <h1>Hello word!</h1>
+    
+   
     )
 }
 
