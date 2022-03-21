@@ -10,7 +10,7 @@ class Likes extends Model {
         autoIncrement: true,
       },
       users_id: {type: DataTypes.INTEGER, allowNull: false},
-      post_id: {type: DataTypes.INTEGER, allowNull: false},
+      posts_id: {type: DataTypes.INTEGER, allowNull: false},
     },
       {
         sequelize
