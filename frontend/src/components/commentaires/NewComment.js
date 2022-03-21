@@ -8,7 +8,7 @@ import SendIcon from '@material-ui/icons/Send';
 function NewComments (props){
  const [commentMessage, setCommentMessage] = useState("");
  const [sendButton, setSendButton]= useState(false);
- const user_id = JSON.parse(localStorage.getItem("user")).id
+ const user_id = JSON.parse(localStorage.getItem("users")).id
  const {submitHandle} = useForm()
 
  const onSubmit = data => {

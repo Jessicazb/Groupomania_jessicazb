@@ -5,13 +5,27 @@ import Avatar from '@material-ui/core/Avatar';
 
 
 function ModifyProfil (){
-
+  const user = JSON.parse(localStorage.getItem("user"))
+  const userPrenom = user.prenom
+  const userNom = user.nom
+  const id = user.id
+  const email = user.email
 
 const {
   register,
   handleSubmit,
   formState: {errors},
 } = useForm()
+
+const onSubmit = data => {
+  console.log(data)
+  const prenom = data.prenom
+  const nom = data.nom
+  const email = data.email
+
+ //axios PUT
+
+}
 
 return(
     <div className="container-profil">

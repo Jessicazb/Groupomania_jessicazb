@@ -9,24 +9,24 @@ exports.createPost = async (req, res, next) => {
   try {
     const user = await User.findOne({
       attributes: ["nom", "prenom", "id"],
-      where: {id: req.body.user_id},
+      where: {id: req.body.users_id},
     })
     if (user !== null) {
-      console.log("user : ", user)
+      console.log("user :", user)
       let imageUrl
       if (req.file) {
-        console.log("filename : ", req.file.filename)
-        imageUrl = `http://localhost:4200/api/upload/${req.file.filename}`
+        console.log("filename", req.file.filename)
+        imageUrl = `http://localhost:4200/api/images/${req.file.filename}`
       } else {
         imageUrl = null
       }
       const post = await Post.create({
-        users_id: req.body.user_id,
+        users_id: req.body.users_id,
         text_content: req.body.text_content,
         imageUrl: imageUrl,
       })
-      post.dataValues.users = user.dataValues
-      console.log("Post créé : ", post.dataValues)
+      post.dataValues.user = user.dataValues
+      console.log("Post créé :", post.dataValues)
       res.status(201).json({post: post})
     } else {
       res.status(400).json({réponse: "L'utilisateur n'existe pas"})
@@ -40,10 +40,10 @@ exports.createPost = async (req, res, next) => {
 exports.deletePost = async (req, res, next) => {
   try {
     const post = await Post.findOne({where: {id: req.body.id}})
-    console.log("Post trouvé : ", post)
+    console.log("Post trouvé :", post)
     if (post.imageUrl) {
       const filename = post.imageUrl.split("/images")[1]
-      console.log("Filename to Delete: ", filename)
+      console.log("Filename to Delete", filename)
       fs.unlink(`images/${filename}`, () => {
         Post.destroy({where: {id: req.body.id}})
         res.status(200).json({message: "Post et image supprimé"})
@@ -68,20 +68,20 @@ exports.getAllPost = (req, res, next) => {
       include: [
         {
           model: User,
-          as: "user",
+          as: "users",
           attributes: ["prenom", "nom", "id"],
         },
         {
           model: Comments,
           include: [
-            {model: User, as: "user", attributes: ["nom", "prenom"]},
+            {model: User, as: "users", attributes: ["nom", "prenom"]},
           ],
           as: "comments",
           attributes: ["id", "content", "post_id", "users_id", "createdAt"],
         },
       ],
     }).then(posts => {
-      console.log("Posts : ", posts)
+      console.log("Posts :", posts)
       res.json(posts)
     })
   } catch (error) {

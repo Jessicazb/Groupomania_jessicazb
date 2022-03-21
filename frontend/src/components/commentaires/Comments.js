@@ -12,6 +12,9 @@ function Comments (props){
     // axios Delete
   }
     
+  const getComment =() => {
+ // axios getAllComments
+  }
 return(
     <div className="card-comments">
     <div className="card-comments-header">

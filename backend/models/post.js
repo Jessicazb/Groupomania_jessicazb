@@ -10,6 +10,7 @@ class Posts extends Model {
         autoIncrement: true,
       },
       text_content: { type: DataTypes.STRING, allowNull: true },
+      //author: { type: DataTypes.STRING, allowNull: true },
       imageUrl: { type: DataTypes.STRING, allowNull: true },
       users_id: { type: DataTypes.INTEGER, allowNull: false },
     },
