@@ -40,8 +40,7 @@ function SignUp () {
                 localStorage.clear();
                 localStorage.setItem("Token", token)
                 localStorage.setItem("userInfo", userInfo)*/
-                
-               
+                  
             })
             .catch(error => {
                 console.log(error)
