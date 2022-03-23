@@ -7,6 +7,7 @@ import PostFeed from '../components/Post/PostFeed';
 
 
 function Feed() {
+    // axios get all posts
     const [posts, setPosts] = useState([
         {
             userId: '1',
@@ -56,7 +57,7 @@ function Feed() {
 
     const Token = localStorage.getItem("Token")
 
-    const userId = JSON.parse(localStorage.getItem("user")).id
+    const userId = JSON.parse(localStorage.getItem("userInfo")).id
     console.log(Token)
     useEffect(() => {
         // récuperation de tous les posts

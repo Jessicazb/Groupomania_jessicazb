@@ -11,6 +11,7 @@ exports.createPost = async (req, res, next) => {
       attributes: ["nom", "prenom", "id"],
       where: {id: req.body.users_id},
     })
+
     if (user !== null) {
       console.log("user :", user)
       let imageUrl
