@@ -15,6 +15,7 @@ Posts.init(connectionDB);
 Comments.init(connectionDB);
 Likes.init(connectionDB);
 
+// associations de chaque modèle 
 Posts.belongsTo(User, {foreignKey: 'users_id'});
 Comments.belongsTo(User, {foreignKey: 'users_id'});
 Comments.belongsTo(Posts, {foreignKey: 'posts_id'});

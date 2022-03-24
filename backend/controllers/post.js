@@ -10,6 +10,7 @@ exports.createPost = async (req, res, next) => {
     const user = await User.findOne({
       attributes: ["nom", "prenom", "id"],
       where: {id: req.body.users_id},
+      order: [["createdAt", "DESC"]],
     })
 
     if (user !== null) {
