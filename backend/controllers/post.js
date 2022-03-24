@@ -63,22 +63,12 @@ exports.deletePost = async (req, res, next) => {
 exports.getAllPost = (req, res, next) => {
   try {
     Post.findAll({
-      
-      attributes: ["id", "text_content", "imageUrl", "createdAt", "users_id"],
+     attributes: ["id", "text_content", "imageUrl", "createdAt", "users_id"],
       order: [["createdAt", "DESC"]],
       include: [
         {
           model: User,
-          as: "users",
           attributes: ["prenom", "nom", "id"],
-        },
-        {
-          model: Comments,
-          include: [
-            {model: User, as: "users", attributes: ["nom", "prenom"]},
-          ],
-          as: "comments",
-          attributes: ["id", "content", "post_id", "users_id", "createdAt"],
         },
       ],
     }).then(posts => {

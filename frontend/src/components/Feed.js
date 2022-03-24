@@ -61,7 +61,7 @@ function Feed() {
     console.log(Token)
     useEffect(() => {
         // récuperation de tous les posts
-        axios.get("http://localhost:4200/api/posts/", {
+        axios.get("http://localhost:4200/api/posts", {
                 headers: {
                     "Authorization": Token,
                 },
@@ -73,7 +73,7 @@ function Feed() {
     }, [Token, setPosts, userId])
     const addnewpost = () => {
         window.location.reload()
-    }
+    } 
     
     return(
         <main className="main">

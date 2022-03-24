@@ -28,7 +28,15 @@ exports.createComment = async (req, res, next) => {
     res.status(200).json({comment, message: "Commentaire supprimé"})
   }
   exports.getComment = (req, res, next) => {
-    Comment.findAll({ where: { postId: req.params.id } })
+    Comment.findAll({ 
+      where: { postId: req.params.id },
+      include: [
+        {
+          model: User,
+          attributes: ["prenom", "nom", "id"],
+        }
+      ]
+    })
       .then((comments) => res.status(200).json(comments))
       .catch((error) => res.status(404).json({ error }));
   };
