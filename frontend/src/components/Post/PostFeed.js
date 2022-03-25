@@ -37,7 +37,7 @@ function PostFeed({post}) {
     const userAdmin = user.admin
 
    async function loadComments(){
-    try{
+   /* try{
         const {data} = await api.get(`/comments?id=${post.id}`)
        setDataComment(data)
        setshowComments(data.length > 0)
@@ -45,7 +45,7 @@ function PostFeed({post}) {
        console.log(data) 
     }catch(error){
         console.log('erro comments')
-    }
+    } */
    }
     // userId ou userAdmin peuvent deleter le post
     useEffect(() => {

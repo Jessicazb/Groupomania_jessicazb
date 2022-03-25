@@ -25,7 +25,6 @@
 .main{
     display: flex;
     width: 100%;
-    height: 700px;
     margin: 0 auto;
     background: #e6a199;
    
@@ -58,13 +57,15 @@
 }
 textarea{
     width: 85%;
-    height: 100px;
+    height: 70px;
     border-radius: 5px;
     margin-left: 90px;
     position: relative;
     bottom: 10px;
 }
 .text_content_input{
+    padding-top: 10px;
+    padding-left: 10px;
     font-size: 16px;
 }
 .error-msg{
@@ -96,12 +97,22 @@ h1{
     padding-top: 20px;
 }
 .getAll-Post{
-    height: 280px;
     margin-top: 20px;
     background-color: white;
     border-radius: 5px;
     border: solid 1px;
-   border-color: #d88a81;    
+    border-color: #d88a81;
+.text-post{
+    padding-top: 15px;
+    padding-left: 10px;
+}
+.post-image-feed{
+    padding-top: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    width: 100%;
+}   
 }
 }
 }
