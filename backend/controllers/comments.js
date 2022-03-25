@@ -12,7 +12,7 @@ exports.createComment = async (req, res, next) => {
       const comment = await Comment.create({
         content: req.body.content,
         users_id: req.body.users_id,
-        post_id: req.body.post_id,
+        posts_id: req.body.posts_id,
       })
       comment.dataValues.users = user.dataValues
       console.log("commentaire créé", comment.dataValues)
@@ -29,7 +29,7 @@ exports.createComment = async (req, res, next) => {
   }
   exports.getComment = (req, res, next) => {
     Comment.findAll({ 
-      where: { postId: req.params.id },
+      where: { posts_id: req.query.id },
       include: [
         {
           model: User,

@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom';
 function Header (){
     // authentification user/avatar
     const user = localStorage.getItem('user');
-    console.log(user);
     if (user) {
         //return JSON.parse(user)
     } 

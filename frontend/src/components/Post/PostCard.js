@@ -3,6 +3,7 @@ import axios from "axios"
 import {useState} from "react"
 import {useForm} from "react-hook-form"
 import Avatar from '@material-ui/core/Avatar';
+import api from '../../services/api';
 
 
 function PostCard (props){
@@ -34,24 +35,16 @@ function PostCard (props){
       if (file) {
         axios.defaults.headers.post["Content-Type"] = "multipart/form-data"
         data = new FormData()
-        data.append("user_id", user_id)
+        data.append("users_id", user_id)
         data.append("text_content", content.text_content)
-        data.append("file", file)
+        data.append("image", file)
       } else {
         axios.defaults.headers.post["Content-Type"] =
           "application/x-www-form-urlencoded"
-        data = {user_id: user_id, text_content: content.text_content}
+        data = {users_id: user_id, text_content: content.text_content}
       }
       // POST
-      await axios({
-        method: "POST",
-        url: "http://localhost:4200/api/posts",
-        headers: {
-          "Authorization": localStorage.getItem("Token"),
-        },
-        params: {userId: user_id},
-        data,
-      })
+        api.post("/posts", data)
         .then(res => {
           
           props.addPost(res.data.post)

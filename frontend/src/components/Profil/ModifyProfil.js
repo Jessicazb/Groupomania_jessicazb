@@ -28,7 +28,7 @@ const onSubmit = data => {
   headers: {
     "Authorization": localStorage.getItem("Token"),
   },
-  params: {users_id: id},
+  params: {user: id},
   data: {
     id,
     prenom,

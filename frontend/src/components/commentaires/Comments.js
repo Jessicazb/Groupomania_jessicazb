@@ -14,20 +14,20 @@ function Comments (props){
   const {comments} = props
   const [DeleteIconTrash, setDeleteIconTrash] = useState(false)
 
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+  const userInfo = JSON.parse(localStorage.getItem("user"))
   const userId = userInfo.id
   const userAdmin = userInfo.admin
 
   useEffect(() => {
-    if (comments.userId === userId || userAdmin === 1) {
+    if (comments.User.id === userId || userAdmin === 1) {
       setDeleteIconTrash(true)
     }
-  }, [userId, comments.userId, userAdmin])
+  }, [userId, userAdmin])
 
  
   const deleteHandle = () => {
     // axios Delete
-    axios({
+      axios({
       method: "DELETE",
       url: "http://localhost:4200/api/comments",
       headers: {
@@ -47,16 +47,16 @@ function Comments (props){
       .catch(err => {
         console.log(err)
       })
+      
   }
     
-  const getAllComment =() => {
- // axios getAllComments
-  }
+
+  
 return(
     <div className="card-comments">
     <div className="card-comments-header">
-    <Avatar src ={comments.author.imageUrl}/>
-    {comments.author.prenom} {comments.author.nom}
+    {/*<Avatar src ={comments.author.imageUrl}/>*/}
+    {comments.User.prenom} {comments.User.nom}
     </div>
     <div className="comments-text">
     <p className="comments-text-p">{comments.content}</p>

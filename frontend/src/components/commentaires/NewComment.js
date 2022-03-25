@@ -8,12 +8,12 @@ import SendIcon from '@material-ui/icons/Send';
 function NewComments (props){
  const [commentMessage, setCommentMessage] = useState("");
  const [sendButton, setSendButton]= useState(false);
- const userId = JSON.parse(localStorage.getItem("userInfo")).id
+ const userId = JSON.parse(localStorage.getItem("user")).id
  const {submitHandle} = useForm()
 
  const onSubmit = data => {
     // axios POST
-    axios({
+     axios({
       method: "POST",
       url: "http://localhost:4200/api/comments",
       headers: {
@@ -31,8 +31,8 @@ function NewComments (props){
       })
       .catch(err => {
         console.log(err)
-      })
- }
+      }) 
+ } 
 
 
  return(

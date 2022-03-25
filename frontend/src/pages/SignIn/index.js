@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import axios from "../../utils/axios";
 import {Link} from 'react-router-dom';
+import api from "../../services/api";
 
 
 function SigIn() {
@@ -25,13 +26,9 @@ function SigIn() {
 
      const onSubmit = data => {
         // axios
-        axios({
-            method: "POST",
-            url: `http://localhost:4200/api/auth/login`,
-            data: {
-                email: data.email,
-                password: data.password,
-            },
+        api.post("/auth/login", {
+            email: data.email,
+            password: data.password
         })
             .then(res => {
                 let token = res.data.token

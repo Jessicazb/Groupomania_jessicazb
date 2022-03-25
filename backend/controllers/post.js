@@ -2,7 +2,7 @@
 const Post = require('../models/post');
 const fs = require('fs');
 const User = require('../models/user');
-const Comments = require('../models/comments');
+//const Comments = require('../models/comments');
 
 // création et ajout d'un post (POST)
 exports.createPost = async (req, res, next) => {
@@ -18,7 +18,7 @@ exports.createPost = async (req, res, next) => {
       let imageUrl
       if (req.file) {
         console.log("filename", req.file.filename)
-        imageUrl = `http://localhost:4200/api/images/${req.file.filename}`
+        imageUrl = `${req.file.filename}`
       } else {
         imageUrl = null
       }
@@ -73,7 +73,7 @@ exports.getAllPost = (req, res, next) => {
         },
       ],
     }).then(posts => {
-      console.log("Posts :", posts)
+      posts.map(post => post.imageUrl = `http://localhost:4200/images/${post.imageUrl}` )
       res.json(posts)
     })
   } catch (error) {

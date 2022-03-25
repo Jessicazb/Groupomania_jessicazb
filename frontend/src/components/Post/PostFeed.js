@@ -7,24 +7,21 @@ import Avatar from '@material-ui/core/Avatar';
 import NewComment from "../commentaires/NewComment";
 import Comments from "../commentaires/Comments";
 import dayjs from 'dayjs';
+import api from '../../services/api'
 
 // Gérer l'heure de posts avec DAYJS
 require("dayjs/locale/fr")
 const relativeTime = require("dayjs/plugin/relativeTime")
 dayjs.extend(relativeTime)
 
-function PostFeed(props) {
+function PostFeed({post}) {
 
-    const { post } = props
     const [DeleteIconTrash, setDeleteIconTrash] = useState(false)
     const [dataComment, setDataComment] = useState([])
     const [showComments, setshowComments] = useState(false)
+    
 
     // éxecuter le bloc de commentaires avec useEffect
-    const allComments = post.allComments
-    useEffect(() => {
-        setDataComment(allComments)
-    }, [allComments])
 
     const addComment = newComment => {
         setDataComment(dataComment.concat(newComment))
@@ -35,25 +32,37 @@ function PostFeed(props) {
     }
 
     // récuperatio  des données dans le local storage
-    const user = JSON.parse(localStorage.getItem("userInfo"))
+    const user = JSON.parse(localStorage.getItem("user"))
     const userId = user.id
-    const userAdmin = user.isAdmin
+    const userAdmin = user.admin
 
+   async function loadComments(){
+    try{
+        const {data} = await api.get(`/comments?id=${post.id}`)
+       setDataComment(data)
+       setshowComments(data.length > 0)
+       console.log("data 2")
+       console.log(data) 
+    }catch(error){
+        console.log('erro comments')
+    }
+   }
     // userId ou userAdmin peuvent deleter le post
     useEffect(() => {
-        if (post.users_id === userId || userAdmin === 1) {
+        loadComments();
+        if (post.users_id === userId || userAdmin) {
             setDeleteIconTrash(true)
         }
     }, [userId, post.users_id, userAdmin])
 
     // Delete Post
     const deleteHandle = () => {
-
+    
         axios({
             method: "DELETE",
             url: "http://localhost:4200/api/posts",
             headers: {
-                "x-access-token": localStorage.getItem("Token"),
+                "Authorization": localStorage.getItem("Token"),
             },
             data: {
                 id: post.id,
@@ -63,12 +72,13 @@ function PostFeed(props) {
             },
         })
             .then(res => {
-                props.addPost(res.data.post)
+                console.log(res)
+                post.addPost(res.data)
             })
             .catch(err => {
                 console.log(err)
             })
-
+ 
     }
 
     // like Post
@@ -80,46 +90,30 @@ function PostFeed(props) {
     return (
 
         <div>
-            <li className="card-feed">
-                <div><Avatar className='avatar-feed' src={post.author.imageUrl} />
-                    {post.author.prenom} {post.author.nom} {dayjs(post.createdAt).locale("fr").fromNow()}
+            <div className="card-feed">
+                <div>
+                    {post.author} 
                 </div>
                 <div className="post-feed">
-                    <p className="text-post">{post.content}</p>
+                    {console.log(post)}<p className="text-post">{post.text_content}</p>
                     {post.imageUrl && (
                         <img
-                            src={post.imageUrl}
+                            src={post.imageUrl} 
                             alt="post-image"
                             className="post-image-feed"
                         />
                     )}
                 </div>
-                <div className="footer-post-feed">
-                    <FavoriteIcon className="favorite-icon" onClick={likeHandle} />
-                    <MessageIcon className="message-icon" onClick={() => setshowComments(!showComments)} />
-                    <span>
-                        {DeleteIconTrash && (
-                            <DeleteIcon className="delete-icon"
-                                onClick={() => {
-                                    if (window.confirm("Voulez-vous supprimer ce post ?")) {
-                                        deleteHandle()
-                                    }
-                                }} />
-                        )}
-                    </span>
-                </div>
-                <div className="ajout-new-comment">
-                    <NewComment posts_id={post.id} newComment={addComment} />
-                </div>
+                
                 <div className="all-comments">
-                    {showComments && post.comments.map((allComments, i) => (
+                    {showComments && dataComment.map((allComments, i) => (
                         <Comments className="comments"
                             allComments={allComments}
                             key={i}
                             commentDelete={deleteComment} />
                     ))}
                 </div>
-            </li>
+            </div>
         </div>
     )
 }

@@ -1,20 +1,24 @@
 // middleware d'authentification 
 const jwt = require('jsonwebtoken');
+const { promisify } = require('util');
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
+
+  const authHeader = req.headers.authorization;
+  if (!authHeader)
+    return res.status(401).json({ error: 'pas de token.' });
+
+  const [, token] = authHeader.split(' ');
   try {
-    const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-    const userId = decodedToken.userId;
-    req.auth = { userId };
-    if (req.body.userId && req.body.userId !== userId) {
-      throw 'User ID non valable!';
-    } else {
-      next();
-    }
-  } catch {
-    res.status(401).json({
-      error: new Error('Requête non authentifiée!')
-    });
+    const decoded = await promisify(jwt.verify)(
+      token,
+      'RANDOM_TOKEN_SECRET'
+    );
+
+    req.auth = { userId:decoded.userId }; 
+
+    return next();
+  } catch (err) {
+    return res.status(401).json({ error: 'Token inválido.' });
   }
 };
