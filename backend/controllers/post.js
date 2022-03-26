@@ -2,6 +2,7 @@
 const Post = require('../models/post');
 const fs = require('fs');
 const User = require('../models/user');
+const { post } = require('../routes/post');
 //const Comments = require('../models/comments');
 
 // création et ajout d'un post (POST)
@@ -41,13 +42,13 @@ exports.createPost = async (req, res, next) => {
 // Supression d'un post (DELETE)
 exports.deletePost = async (req, res, next) => {
   try {
-    const post = await Post.findOne({where: {id: req.body.id}})
+    const post = await Post.findOne({where: {id: req.params.id}})
     console.log("Post trouvé :", post)
     if (post.imageUrl) {
       const filename = post.imageUrl.split("/images")[1]
       console.log("Filename to Delete", filename)
       fs.unlink(`images/${filename}`, () => {
-        Post.destroy({where: {id: req.body.id}})
+        Post.destroy({where: {id: req.params.id}})
         res.status(200).json({message: "Post et image supprimé"})
       })
     } else {
@@ -73,7 +74,9 @@ exports.getAllPost = (req, res, next) => {
         },
       ],
     }).then(posts => {
-      posts.map(post => post.imageUrl = `http://localhost:4200/images/${post.imageUrl}` )
+      posts.map(post => {
+      if( post.imageUrl) post.imageUrl = `http://localhost:4200/images/${post.imageUrl}` 
+      });
       res.json(posts)
     })
   } catch (error) {

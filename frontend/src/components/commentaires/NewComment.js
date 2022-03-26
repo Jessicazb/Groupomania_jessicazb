@@ -1,56 +1,49 @@
 import React from "react"
-import axios from "axios"
-import {useState} from "react"
-import {useForm} from "react-hook-form"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
 import SendIcon from '@material-ui/icons/Send';
+import api from "../../services/api";
 
 
-function NewComments (props){
- const [commentMessage, setCommentMessage] = useState("");
- const [sendButton, setSendButton]= useState(false);
- const userId = JSON.parse(localStorage.getItem("user")).id
- const {submitHandle} = useForm()
+function NewComments({ posts_id, newComment }) {
+  const [commentMessage, setCommentMessage] = useState("");
+  const [sendButton, setSendButton] = useState(false);
+  const userId = JSON.parse(localStorage.getItem("user")).id
+  const { submitHandle } = useForm()
 
- const onSubmit = data => {
-    // axios POST
-     axios({
-      method: "POST",
-      url: "http://localhost:4200/api/comments",
-      headers: {
-        "Authorization": localStorage.getItem("Token"),
-      },
-      data: {
+  const onSubmit = data => {
+    console.log(data)
+      api.post("/comments", {
         users_id: userId,
-        post_id: props.post_id,
-        content: data.content,
-      },
-    })
-      .then(res => {
-        console.log("data comment", res.data.comment)
-        props.newComment(res.data.comment)
+        posts_id: posts_id,
+        content: commentMessage,
       })
-      .catch(err => {
-        console.log(err)
-      }) 
- } 
+        .then(res => {
+          console.log("data comment", res.data)
+          newComment(res.data.comment)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
 
 
- return(
+  return (
     <div>
-    <form onSubmit={submitHandle(onSubmit)} className="comment-form">
-    <input
+      <form onSubmit={(onSubmit)} className="comment-form">
+        <input className="new-comments"
           type="text"
           placeholder="Écrivez un commentaire..."
           onChange={e => setCommentMessage(e.target.value)}
           value={commentMessage}
           id="input-comment"
         />
-    { setSendButton &&(
-     <SendIcon className="send-icon" onClick={onSubmit}/>
-    )}
-    </form>
-     </div>
- )
+        {setSendButton && (
+          <SendIcon className="send-icon" onClick={onSubmit} />
+        )}
+      </form>
+    </div>
+  )
 }
 
 export default NewComments;

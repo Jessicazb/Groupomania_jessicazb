@@ -1,60 +1,87 @@
 import React from "react";
 import axios from "axios"
-import {useForm} from "react-hook-form"
+import { useForm } from "react-hook-form"
+import { useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import DeleteProfil from "./DeleteProfil";
 
 
-function ModifyProfil (){
+function ModifyProfil() {
 
-const {
-  register,
-  handleSubmit,
-  formState: {errors},
-} = useForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
 
-const onSubmit = data => {
-  console.log(data)
-  const prenom = data.prenom
-  const nom = data.nom
-  const email = data.email
-  const avatar = data.avatar 
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"))
-  const id = userInfo.id
- //axios PUT
-  axios({
-  method: "PUT",
-  url: "http://localhost:4200/api/updateUser",
-  headers: {
-    "Authorization": localStorage.getItem("Token"),
-  },
-  params: {user: id},
-  data: {
-    id,
-    prenom,
-    nom,
-    email,
-    avatar,
-  },
-})
-  .then(res => {
-    const userInfo = JSON.stringify(res.data.users)
-    localStorage.setItem("userInfo", userInfo)
-  })
-  .catch(err => {
-    console.log(err)
-  }) 
-}
+// gérer l'image avatar
+  const [avatarImage, setAvatarImage] = useState(null)
+  const [file, setFile] = useState(false)
 
-return(
+  const handleImage = e => {
+    setAvatarImage(URL.createObjectURL(e.target.files[0]))
+    setFile(e.target.files[0])
+  }
+  const onSubmit = data => {
+    console.log(data)
+    const prenom = data.prenom
+    const nom = data.nom
+    const email = data.email
+    const avatar = data.avatar
+    const userInfo = JSON.parse(localStorage.getItem("user"))
+    const id = userInfo.id
+   
+    // téléchargement de l'image pour avatar
+    if (file) {
+      axios.defaults.headers.users["Data-Type"] = "multipart/form-data"
+      data = new FormData()
+      data.append("users_id", userInfo)
+      data.append("image", file)
+    }else {
+      axios.defaults.headers.users =
+        "application/x-www-form-urlencoded"
+      data = {users_id: userInfo, avatar: data.avatar}
+    }
+    //axios PUT
+    axios({
+      method: "PUT",
+      url: `http://localhost:4200/api/updateUser?user=${id}`,
+      headers: {
+        "Authorization": localStorage.getItem("Token"),
+      },
+      params: { user: id },
+      data: {
+        id,
+        prenom,
+        nom,
+        email,
+        avatar,
+      },
+    })
+      .then(res => {
+        const userInfo = JSON.stringify(res.data.users)
+        localStorage.setItem("user", userInfo)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  return (
     <div onSubmit={handleSubmit(onSubmit)} className="container-profil">
-        <form className="form">
-            <div className="form-profil">
-            <Avatar className='avatar'/>
-            <label htmlFor="prenom" className="prenom-label">
+      <form className="form">
+        <div className="form-profil">
+          <Avatar className='avatar'
+          type="file"
+          id="imageUrl"
+          name="file"
+          accept=".jpg, .jpeg, .png, .gif"
+          onChange={e => handleImage(e)}
+        />
+          <label htmlFor="prenom" className="prenom-label">
             Prénom:
           </label>
-          <br/>
+          <br />
           <input
             type="text"
             className="form-input"
@@ -70,15 +97,15 @@ return(
             })}
           />
           {errors.prenom && <span>{errors.prenom.message}</span>}
-          <br/>
+          <br />
           <label htmlFor="nom" className="nom-label">
             Nom:
           </label>
-          <br/>
+          <br />
           <input
             type="text"
             className="form-input"
-            
+
             {...register("nom", {
               minLength: {
                 value: 2,
@@ -91,30 +118,30 @@ return(
             })}
           />
           {errors.nom && <span>{errors.nom.message}</span>}
-          <br/>
+          <br />
           <label htmlFor="email" className="email-label">
             Email:
           </label>
           <br />
           <input
             className="form-input"
-           
+
             type="email"
             {...register("email", {
               message: "Vous devez entrer une adresse mail valide",
             })}
           />
           {errors.email && <span>{errors.email.message}</span>}
-          <br/>
+          <br />
           <input
             className="button-profil"
             type="submit"
             value="Modifier"
           />
           <DeleteProfil />
-            </div>
-        </form>
+        </div>
+      </form>
     </div>
-)
+  )
 }
 export default ModifyProfil;

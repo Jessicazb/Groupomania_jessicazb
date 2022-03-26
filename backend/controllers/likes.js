@@ -2,40 +2,30 @@ const Post = require('../models/post');
 const Like = require('../models/likes');
 
 exports.createLike = (req, res, next) => {
-  const userId = identification.users_id(req);
+  const userId = req.body.users_id;
   const isliked = req.body.like;
   console.log(isliked);
-  const postId = req.params.id;
+  const postId = req.body.posts_id;
 
   Post.findOne({ where: { id: postId } })
     .then((post) => {
       if (!post) {
         return res.status(404).json({ error: "Post introuvable !" });
       } else if (isliked) {
-        Like.create({ userId: userId, postId: postId })
+        Like.create({ users_id: userId, posts_id: postId })
           .then((like) => {
-            post
-              .update({ likes: post.likes + 1 })
-              .then((post) => res.status(201).json({ message: "Post liké" }))
-              .catch((error) =>
-                res.status(500).json({ error: " Erreur update post" })
-              );
+            res.status(201).json({ message: "Post liké" })
           })
           .catch((error) => res.status(400).json({ error }));
       } else if (!isliked) {
         Like.destroy({
           where: {
-            userId: userId,
-            PostId: postId,
+            users_id: userId,
+            posts_id: postId,
           },
         })
           .then((like) => {
-            post
-              .update({ likes: post.likes - 1 })
-              .then((post) => res.status(201).json({ message: "Post disliké" }))
-              .catch((error) =>
-                res.status(500).json({ error: " Erreur update post" })
-              );
+            res.status(201).json({ message: "Post disliké" })
           })
           .catch((error) =>
             res.status(400).json({ message: "problème destroy like" })
@@ -47,7 +37,7 @@ exports.createLike = (req, res, next) => {
 
 //recupérer tous les likes d'un post
 exports.getLike = (req, res, next) => {
-  Like.findAll({ where: { postId: req.params.id } })
+  Like.findAll({ where: { posts_id: req.params.id } })
     .then((like) => res.status(200).json(like))
     .catch((error) => res.status(404).json({ error }));
 };

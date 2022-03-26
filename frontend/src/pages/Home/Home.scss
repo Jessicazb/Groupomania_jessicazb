@@ -18,7 +18,14 @@
        margin-right: 120px;
    }
    .avatar{
-       margin-right: 50px;
+       margin-right: 70px;
+   }
+   .logout {
+      padding-top: 15px;
+   }
+   .icon-logout{
+       margin-top: 12px;
+       color: black;
    }
  
 }
@@ -112,7 +119,55 @@ h1{
     padding-right: 5px;
     padding-bottom: 10px;
     width: 100%;
+}
+.author-posts{
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.favorite-icon{
+    font-size: 20px;
+    cursor: pointer;
+    color:rgb(233, 50, 50) ;
+    margin-left: 10px;
+}
+.delete-icon{
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.new-comments{
+    width: 96%;
+    height: 40px;
+    margin-left: 3px;
+    margin-bottom: 10px;
+}
+.send-icon{
+    position: relative;
+    top: 10px;
+    cursor: pointer;
 }   
+}
+.all-comments{
+    position: relative;
+.card-comments{
+    border-top: solid 1px;
+    border-color:#d88a81;
+    margin-top: 10px;
+.author-comments{
+    padding-left: 10px;
+    padding-top: 10px;
+    font-weight: bolder;
+}
+.comments-text-p{
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+
+}
+.delete-icon-comments{
+    cursor: pointer;
+}
+}
 }
 }
 }

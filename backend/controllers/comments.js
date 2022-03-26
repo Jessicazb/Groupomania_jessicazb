@@ -14,7 +14,7 @@ exports.createComment = async (req, res, next) => {
         users_id: req.body.users_id,
         posts_id: req.body.posts_id,
       })
-      comment.dataValues.users = user.dataValues
+      comment.dataValues.User = user.dataValues
       console.log("commentaire créé", comment.dataValues)
       res.status(201).json({comment: comment})
     } catch {
@@ -24,7 +24,7 @@ exports.createComment = async (req, res, next) => {
   
   // supression d'un commentaire
   exports.deleteComment = async (req, res) => {
-    const comment = await Comment.destroy({where: {id: req.body.id}})
+    const comment = await Comment.destroy({where: {id: req.params.id}})
     res.status(200).json({comment, message: "Commentaire supprimé"})
   }
   exports.getComment = (req, res, next) => {

@@ -7,19 +7,19 @@ import api from '../services/api';
 
 function Feed() {
     const [posts, setPosts] = useState([])
-    const [comments, setComments]= useState([])
+    const [comments, setComments] = useState([])
     const Token = localStorage.getItem("Token")
     const user = localStorage.getItem('user')
     const userId = JSON.parse(user).id
 
-    
-    async function loadPosts(){
-        try{
-            const {data} = await api.get("/posts");
-           setPosts(data)
-           console.log("data 2")
-           console.log(data) 
-        }catch(error){
+
+    async function loadPosts() {
+        try {
+            const { data } = await api.get("/posts");
+            setPosts(data)
+            console.log("data 2")
+            console.log(data)
+        } catch (error) {
             console.log('erro')
         }
     }
@@ -31,6 +31,18 @@ function Feed() {
         window.location.reload()
     }
 
+    // Delete Post
+    async function deletePost(id) {
+        try {
+            await api.delete(`/posts/${id}`);
+            const data = posts.filter(post => post.id != id);
+            setPosts(data);
+        } catch (error) {
+            console.log('erro')
+        }
+    }
+    
+
     return (
         <main className="main">
             <div className="feed">
@@ -41,7 +53,8 @@ function Feed() {
 
                 {posts.map(post => (
                     <div className="getAll-Post">
-                        <PostFeed post={post} />
+                        <PostFeed post={post} 
+                        deletePost={()=>deletePost(post.id)} />
                     </div>
                 ))}
 
