@@ -44,7 +44,7 @@ exports.getLike = (req, res, next) => {
 
 //Renvoie le like si un utilisateur aime un post
 exports.isLiked = (req, res, next) => {
-  Like.findOne({ where: { userId: req.params.id, postId: req.params.idPost } })
+  Like.findOne({ where: { users_id: req.params.id, posts_id: req.params.idPost } })
     .then((like) => res.status(200).json(like))
     .catch((error) => res.status(404).json({ error }));
 };

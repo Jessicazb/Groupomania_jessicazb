@@ -25,7 +25,6 @@ function PostFeed({ post, deletePost, posts_id, newLike }) {
 
     const addComment = newComment => {
         setDataComment(prevState => {
-            console.log("executou comments")
             return [...prevState, newComment]
         })
     }
@@ -45,10 +44,7 @@ function PostFeed({ post, deletePost, posts_id, newLike }) {
             const { data } = await api.get(`/comments?id=${post.id}`)
             setDataComment(data)
             setshowComments(data.length > 0)
-            console.log("data 2")
-            console.log(data)
         } catch (error) {
-            console.log('erro comments')
         }
     }
     // userId ou userAdmin peuvent deleter le post
@@ -62,29 +58,28 @@ function PostFeed({ post, deletePost, posts_id, newLike }) {
 
 
     // like Post
-    const likeHandle = data => {
-        api.post("/likes", {
-            users_id: userId,
-            posts_id: posts_id,
-            like: true
-        })
-            .then(res => {
-                console.log("data like", res.data)
-                newLike(res.data.like)
+    const likeHandle = async data => {
+        try {
+            const response = await api.get(`/${post.id}/like/${userId}`)
+            const { data } = await api.post("/likes", {
+                users_id: userId,
+                posts_id: posts_id,
+                like: !response.data
             })
-            .catch(err => {
-                console.log(err)
-            })
+            console.log(data.like);
+            newLike(data.like)
+        } catch (error) {
+            console.log(error.message)
+        }
     }
-       // get like
+    // get like
     async function loadLikes() {
         try {
-            const { data } = await api.get(`/likes/posts/?id=${post.id}`)
-            setshowLikes(data)
-            console.log("data 3")
-            console.log(data)
+            const { data } = await api.get(`/likes/posts/${post.id}`)
+            setshowLikes(data.length)
+            
         } catch (error) {
-            console.log('erro likes')
+            console.log("error like")
         }
     }
     useEffect(() => {
@@ -109,7 +104,7 @@ function PostFeed({ post, deletePost, posts_id, newLike }) {
                 </div>
                 <div className="footer-post-feed">
                     <FavoriteIcon className="favorite-icon" onClick={likeHandle} />
-                    <span className="all-likes"> </span>
+                    <span className="all-likes">{showLikes}</span>
                     <span>
                         {DeleteIconTrash && (
                             <DeleteIcon className="delete-icon"
@@ -124,7 +119,7 @@ function PostFeed({ post, deletePost, posts_id, newLike }) {
                 <div className="ajout-new-comment">
                     <NewComment posts_id={post.id} newComment={addComment} />
                 </div>
-                <div className="all-comments"> <MessageIcon className="icon-message"/>
+                <div className="all-comments"> <MessageIcon className="icon-message" /> 
                     {showComments && dataComment.map((comments, i) => (
                         <Comments className="comments"
                             comments={comments}
