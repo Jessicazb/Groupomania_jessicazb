@@ -35,11 +35,6 @@ function SignUp () {
             .then(res => {
                 localStorage.clear();
                 navigate("/sign-in")
-                /*let token = res.data.token
-                let userInfo = JSON.stringify(res.data)
-                localStorage.clear();
-                localStorage.setItem("Token", token)
-                localStorage.setItem("userInfo", userInfo)*/
                   
             })
             .catch(error => {

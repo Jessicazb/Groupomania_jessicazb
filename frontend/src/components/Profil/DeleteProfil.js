@@ -1,15 +1,18 @@
 import axios from "axios"
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useNavigate } from "react-router-dom";
 
 function DeleteProfil() {
+
+  const navigate = useNavigate()
+
     const deleteHandle = () => {
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+        const userInfo = JSON.parse(localStorage.getItem("user"))
         const userId = userInfo.id
-    
-        //axios DELETE
+
         axios({
             method: "DELETE",
-            url: "http://localhost:4200/api/deleteUser",
+            url: `http://localhost:4200/api/auth/deleteUser?user=${userId}`,
             headers: {
               "Authorization": localStorage.getItem("Token"),
             },
@@ -19,7 +22,9 @@ function DeleteProfil() {
             },
           })
             .then(res => {
-              localStorage.clear()
+              localStorage.clear();
+              (window.confirm("Votre compte a bien été supprimée!"))
+              navigate("/signUp")
             })
             .catch(err => {
               console.log(err)

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react"
 import DeleteIcon from '@material-ui/icons/Delete';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Avatar from '@material-ui/core/Avatar';
+import MessageIcon from '@material-ui/icons/Message';
 import NewComment from "../commentaires/NewComment";
 import Comments from "../commentaires/Comments";
 import dayjs from 'dayjs';
@@ -123,7 +124,7 @@ function PostFeed({ post, deletePost, posts_id, newLike }) {
                 <div className="ajout-new-comment">
                     <NewComment posts_id={post.id} newComment={addComment} />
                 </div>
-                <div className="all-comments">
+                <div className="all-comments"> <MessageIcon className="icon-message"/>
                     {showComments && dataComment.map((comments, i) => (
                         <Comments className="comments"
                             comments={comments}

@@ -5,7 +5,6 @@ import { useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import DeleteProfil from "./DeleteProfil";
 
-
 function ModifyProfil() {
 
   const {
@@ -35,21 +34,21 @@ function ModifyProfil() {
     if (file) {
       axios.defaults.headers.users["Data-Type"] = "multipart/form-data"
       data = new FormData()
-      data.append("users_id", userInfo)
+      data.append("users_id", id)
       data.append("image", file)
     }else {
       axios.defaults.headers.users =
         "application/x-www-form-urlencoded"
-      data = {users_id: userInfo, avatar: data.avatar}
+      data = {users_id: id, avatar: data.avatar}
     }
     //axios PUT
     axios({
       method: "PUT",
-      url: `http://localhost:4200/api/updateUser?user=${id}`,
+      url: `http://localhost:4200/api/auth/updateUser?user=${id}`,
       headers: {
         "Authorization": localStorage.getItem("Token"),
       },
-      params: { user: id },
+      params: { users_id: id },
       data: {
         id,
         prenom,
