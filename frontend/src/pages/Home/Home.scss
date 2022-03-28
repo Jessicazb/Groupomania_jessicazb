@@ -111,7 +111,7 @@ h1{
     border-color: #d88a81;
 .text-post{
     padding-top: 15px;
-    padding-left: 10px;
+    padding-left: 15px;
 }
 .post-image-feed{
     padding-top: 20px;
@@ -123,15 +123,28 @@ h1{
     height: 400px;
     
 }
+.flex-avatar{
+    display: flex;
+.avatar-user{
+    margin-top: 10px;
+    margin-left: 10px;
+}
 .author-posts{
     padding-left: 10px;
-    padding-top: 10px;
+    padding-top: 20px;
+}
+}
+.time_post{
+    padding-left: 60px;
+    font-size: 12px;
+    position: relative;
+    bottom: 10px;
 }
 .favorite-icon{
     font-size: 20px;
     cursor: pointer;
     color:rgb(233, 50, 50) ;
-    margin-left: 10px;
+    margin-left: 15px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -162,9 +175,14 @@ h1{
 }
 .all-comments{
     position: relative;
+.p-comments{
+    padding-left: 10px;
+    position: relative;
+    bottom: 5px;
+}
 .icon-message{
     margin-left: 10px;
-    margin-top: 10px;
+    font-size: 20px;
 } 
 .card-comments{
     border-top: solid 1px;

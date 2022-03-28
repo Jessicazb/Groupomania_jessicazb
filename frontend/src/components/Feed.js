@@ -41,8 +41,6 @@ function Feed() {
             console.log('erro')
         }
     }
-    
-
     return (
         <main className="main">
             <div className="feed">

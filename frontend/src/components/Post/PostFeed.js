@@ -89,9 +89,10 @@ function PostFeed({ post, deletePost, posts_id, newLike }) {
     return (
         <div>
             <div className="card-feed">
-                <div>
+                <div className="flex-avatar"><Avatar className="avatar-user"/>
                     <h4 className="author-posts">{post.User.prenom} {post.User.nom}</h4>
                 </div>
+                <span className="time_post">{dayjs(post.createdAt).locale("fr").fromNow()}</span>
                 <div className="post-feed">
                     {console.log(post)}<p className="text-post">{post.text_content}</p>
                     {post.imageUrl && (
@@ -119,7 +120,7 @@ function PostFeed({ post, deletePost, posts_id, newLike }) {
                 <div className="ajout-new-comment">
                     <NewComment posts_id={post.id} newComment={addComment} />
                 </div>
-                <div className="all-comments"> <MessageIcon className="icon-message" /> 
+                <div className="all-comments"> <span className="p-comments">Commentaires</span><MessageIcon className="icon-message" /> 
                     {showComments && dataComment.map((comments, i) => (
                         <Comments className="comments"
                             comments={comments}

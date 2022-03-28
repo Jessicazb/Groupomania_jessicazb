@@ -111,3 +111,34 @@ exports.deleteUser = async (req, res, next) => {
     return res.status(500).send({ error: "Erreur serveur" })
   }
 }
+// création avatar user
+/*exports.createAvatar = async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      attributes: ["nom", "prenom", "id"],
+      where: {id: req.body.users_id},
+      order: [["createdAt", "DESC"]],
+    })
+
+    if (user !== null) {
+      console.log("user :", user)
+      let imageUrl
+      if (req.file) {
+        console.log("filename", req.file.filename)
+        imageUrl = `${req.file.filename}`
+      } else {
+        imageUrl = null
+      }
+      const avatar = await avatar.create({
+        imageUrl: imageUrl,
+      })
+      avatar.dataValues.user = user.dataValues
+      console.log("Avatar créé :", avatar.dataValues)
+      res.status(201).json({avatar: avatar})
+    } else {
+      res.status(400).json({réponse: "L'utilisateur n'existe pas, il n'est pas possible d'ajouter un avatar"})
+    }
+  } catch (error) {
+    return res.status(500).send({error: "Erreur serveur"})
+  }
+}; */

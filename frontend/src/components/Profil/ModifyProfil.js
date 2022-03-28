@@ -5,6 +5,7 @@ import { useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import DeleteProfil from "./DeleteProfil";
 
+
 function ModifyProfil() {
 
   const {
@@ -13,7 +14,7 @@ function ModifyProfil() {
     formState: { errors },
   } = useForm()
 
-// gérer l'image avatar
+  // gérer l'image avatar
   const [avatarImage, setAvatarImage] = useState(null)
   const [file, setFile] = useState(false)
 
@@ -29,18 +30,19 @@ function ModifyProfil() {
     const avatar = data.avatar
     const userInfo = JSON.parse(localStorage.getItem("user"))
     const id = userInfo.id
-   
+
     // téléchargement de l'image pour avatar
     if (file) {
       axios.defaults.headers.users["Data-Type"] = "multipart/form-data"
       data = new FormData()
       data.append("users_id", id)
       data.append("image", file)
-    }else {
+    } else {
       axios.defaults.headers.users =
         "application/x-www-form-urlencoded"
-      data = {users_id: id, avatar: data.avatar}
+      data = { users_id: id, avatar: data.avatar }
     }
+
     //axios PUT
     axios({
       method: "PUT",
@@ -71,12 +73,12 @@ function ModifyProfil() {
       <form className="form">
         <div className="form-profil">
           <Avatar className='avatar'
-          type="file"
-          id="imageUrl"
-          name="file"
-          accept=".jpg, .jpeg, .png, .gif"
-          onChange={e => handleImage(e)}
-        />
+            type="file"
+            id="imageUrl"
+            name="file"
+            accept=".jpg, .jpeg, .png, .gif"
+            onChange={e => handleImage(e)}
+          />
           <label htmlFor="prenom" className="prenom-label">
             Prénom:
           </label>
