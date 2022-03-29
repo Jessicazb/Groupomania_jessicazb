@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {useNavigate} from "react-router-dom"
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "../../utils/axios";
 import {Link} from 'react-router-dom';
 import api from "../../services/api";
@@ -21,6 +21,9 @@ function SigIn() {
         formState: { errors },
     } = useForm()
 
+    useEffect(()=>{
+        localStorage.clear()
+    },[])
     // usenavigate
     const navigate = useNavigate()
 

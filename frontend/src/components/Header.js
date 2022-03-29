@@ -6,7 +6,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 function Header (){
     const [userLogout, setUserLogout] = useState({});
     const logout = () =>{
-        localStorage.clear()
         window.location.reload();
     }
     useEffect(()=>{
@@ -27,7 +26,7 @@ function Header (){
         <div className="flex-items-header">
         <Link to = "/Profil"><Avatar src={user.avatar} className='avatar'/></Link>
         <span className='logout'>se déconnecter</span>
-        <Link onClick = {logout} to ="/sign-in"><ExitToAppIcon className='icon-logout'/></Link>
+        <Link to ="/sign-in"><ExitToAppIcon className='icon-logout'/></Link>
         </div>
 
     </div>
