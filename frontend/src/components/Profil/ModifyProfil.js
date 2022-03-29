@@ -31,7 +31,7 @@ function ModifyProfil() {
   async function loadUser() {
     const userInfo = JSON.parse(localStorage.getItem("user"))
     const id = userInfo.id
-   
+
     try {
       const { data } = await api.get(`auth/updateUser/${id}`)
       setInfoUser({
@@ -62,14 +62,14 @@ function ModifyProfil() {
 
     // téléchargement de l'image pour avatar
     if (file) {
-      axios.defaults.headers.users["Data-Type"] = "multipart/form-data"
+      axios.defaults.headers.users = "multipart/form-data"
       data = new FormData()
       data.append("users_id", id)
-      data.append("image", file)
+      data.append("avatar", file)
     } else {
       axios.defaults.headers.users =
         "application/x-www-form-urlencoded"
-      data = { users_id: id, avatar: data.avatar }
+      data = { users_id: data.id, avatar: data.avatar }
     }
 
 
@@ -102,9 +102,10 @@ function ModifyProfil() {
     <div onSubmit={handleSubmit(onSubmit)} className="container-profil">
       <form className="form">
         <div className="form-profil">
-          <Avatar className='avatar'
+        <Avatar className='avatar' src={avatarImage} alt="" />
+          <input className='fichier-profil'
             type="file"
-            id="imageUrl"
+            id="avatar"
             name="file"
             accept=".jpg, .jpeg, .png, .gif"
             onChange={e => handleImage(e)}

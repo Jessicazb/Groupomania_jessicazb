@@ -1,4 +1,3 @@
-import axios from "axios"
 import React, { useState, useEffect } from "react"
 import DeleteIcon from '@material-ui/icons/Delete';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -14,7 +13,7 @@ require("dayjs/locale/fr")
 const relativeTime = require("dayjs/plugin/relativeTime")
 dayjs.extend(relativeTime)
 
-function PostFeed({ post, deletePost, newLike }) {
+function PostFeed({ post, deletePost}) {
 
     const [DeleteIconTrash, setDeleteIconTrash] = useState(false)
     const [dataComment, setDataComment] = useState([])
@@ -37,7 +36,6 @@ function PostFeed({ post, deletePost, newLike }) {
     const user = JSON.parse(localStorage.getItem("user"))
     const userId = user.id
     const userAdmin = user.admin
-    const Token = localStorage.getItem("Token")
 
     async function loadComments() {
         try {
@@ -117,10 +115,9 @@ function PostFeed({ post, deletePost, newLike }) {
                         )}
                     </span>
                 </div>
-                <div className="ajout-new-comment">
-                    <NewComment posts_id={post.id} newComment={addComment} />
-                </div>
-                <div className="all-comments"> <span className="p-comments">Commentaires</span><MessageIcon className="icon-message" /> 
+            
+                <div className="all-comments"><MessageIcon className="icon-message" />
+                <span className="p-comments">Commentaires</span>
                     {showComments && dataComment.map((comments, i) => (
                         <Comments className="comments"
                             comments={comments}
@@ -129,6 +126,9 @@ function PostFeed({ post, deletePost, newLike }) {
                             posts_id={post.id}
                         />
                     ))}
+                </div>
+                <div className="ajout-new-comment">
+                    <NewComment posts_id={post.id} newComment={addComment} />
                 </div>
             </div>
         </div>

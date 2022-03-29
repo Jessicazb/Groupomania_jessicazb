@@ -5,7 +5,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {useNavigate} from "react-router-dom"
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import axios from "../../utils/axios";
 import {Link} from 'react-router-dom';
 import api from "../../services/api";
 
@@ -83,7 +82,7 @@ function SigIn() {
                             pattern: {
                                 value: /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,64})$/,
                                 message:
-                                    "Votre mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
+                                    "Vous devez entrer un mot de passe valide. Votre mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
                             },
                         })}
                     />

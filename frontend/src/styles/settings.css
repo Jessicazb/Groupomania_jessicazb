@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../fonts/Ubuntu-R.ttf");
+}
+
+* {
+  font-family: "Ubuntu";
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+/*# sourceMappingURL=settings.css.map */

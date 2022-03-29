@@ -7,7 +7,7 @@
     border-radius: 15px;
     border-color:#d88a81;
     width: 60%;
-    height: 400px;
+    height: 420px;
     margin-left: 230px;
     position: relative;
     top: 70px;
@@ -17,6 +17,12 @@
     margin-top: 30px;
     width: 8%;
     height: 60px;
+    cursor: pointer;
+}
+.fichier-profil{
+    padding-left: 230px;
+    padding-top: 10px;
+    border: none;
     cursor: pointer;
 }
 input{
@@ -46,7 +52,7 @@ label{
 }
 }
 .supprimer-compte{
-    padding-top: 25px;
+    padding-top: 7px;
     margin-left: 35px;
 .delete-icon{
     position: relative;

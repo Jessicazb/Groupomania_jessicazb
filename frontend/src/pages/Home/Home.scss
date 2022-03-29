@@ -50,7 +50,7 @@
     background-color: white;
     border-radius: 5px;
     border: solid 1px;
-   border-color: #d88a81;
+   border-color: gray;
 }
 .header-post{
     display: flex;
@@ -108,7 +108,7 @@ h1{
     background-color: white;
     border-radius: 5px;
     border: solid 1px;
-    border-color: #d88a81;
+    border-color: gray;
 .text-post{
     padding-top: 15px;
     padding-left: 15px;
@@ -160,11 +160,19 @@ h1{
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.comment-form{
+    border-top: solid 1px;
+    border-color:gray;
+    margin-top: 15px;
+    width: 99%;
+    margin-left: 5px;
+}
 .new-comments{
-    width: 96%;
+    width: 90%;
     height: 40px;
-    margin-left: 3px;
+    margin-left: 10px;
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 .send-icon{
     position: relative;
@@ -175,18 +183,24 @@ h1{
 }
 .all-comments{
     position: relative;
+    border-top: solid 1px;
+    border-color:gray;
+    width: 99%;
+    margin-left: 5px;
 .p-comments{
-    padding-left: 10px;
-    position: relative;
-    bottom: 5px;
+    margin-left: 10px; 
+    font-size: 14px;
 }
 .icon-message{
     margin-left: 10px;
-    font-size: 20px;
+    font-size: 17px;
+    margin-top: 15px;
+    position: relative;
+    top: 6px;
 } 
 .card-comments{
     border-top: solid 1px;
-    border-color:#d88a81;
+    border-color:gray;
     margin-top: 10px;
 .author-comments{
     padding-left: 10px;

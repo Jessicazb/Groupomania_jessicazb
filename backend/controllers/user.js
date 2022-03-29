@@ -71,6 +71,15 @@ exports.updateUser = async (req, res, next) => {
   try {
     let user = await User.findOne({ where: { id: req.body.id } })
     console.log("User trouvé : ", user.dataValues)
+    if(req.file){
+      let avatar = `${req.file.filename}`
+      if (req.file) {
+        console.log("filename", req.file.filename)
+        user.avatar = req.body.avatar
+      } else {
+        avatar = null
+      }
+    }
     if (req.body.email) {
       user.email = req.body.email
       console.log("Ancien email : ", user.email)

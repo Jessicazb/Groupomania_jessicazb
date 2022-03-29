@@ -1,0 +1,71 @@
+.container-profil {
+  background-color: #e6a199;
+  height: 533px;
+}
+
+.container-profil .form-profil {
+  border: solid 2px;
+  border-radius: 15px;
+  border-color: #d88a81;
+  width: 60%;
+  height: 420px;
+  margin-left: 230px;
+  position: relative;
+  top: 70px;
+  background-color: white;
+}
+
+.container-profil .form-profil .avatar {
+  margin-left: 350px;
+  margin-top: 30px;
+  width: 8%;
+  height: 60px;
+  cursor: pointer;
+}
+
+.container-profil .form-profil .fichier-profil {
+  padding-left: 230px;
+  padding-top: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.container-profil .form-profil input {
+  width: 90%;
+  margin-top: 5px;
+  height: 35px;
+  margin-left: 35px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: solid 1px;
+}
+
+.container-profil .form-profil .button-profil {
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  background-color: #e93232;
+  border: none;
+  border-radius: 5px;
+}
+
+.container-profil .form-profil .button-profil:hover {
+  color: #d88a81;
+  background-color: black;
+}
+
+.container-profil .form-profil label {
+  margin-left: 35px;
+}
+
+.supprimer-compte {
+  padding-top: 7px;
+  margin-left: 35px;
+}
+
+.supprimer-compte .delete-icon {
+  position: relative;
+  top: 5px;
+  cursor: pointer;
+}
+/*# sourceMappingURL=Profil.css.map */
