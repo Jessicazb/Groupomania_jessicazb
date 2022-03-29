@@ -10,6 +10,7 @@ const userCtrl = require('../controllers/user');
 router.post('/signup', validatePassword, userCtrl.signup);
 router.post('/login', tentativeConnexion.limiteur, userCtrl.login);
 //router.post('/avatar-user', multer, userCtrl.createAvatar);
+router.get('/updateUser/:id', userCtrl.getUser);
 router.put('/updateUser', userCtrl.updateUser);
 router.delete('/deleteUser', userCtrl.deleteUser);
 

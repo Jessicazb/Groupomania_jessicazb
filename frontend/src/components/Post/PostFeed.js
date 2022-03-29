@@ -14,12 +14,12 @@ require("dayjs/locale/fr")
 const relativeTime = require("dayjs/plugin/relativeTime")
 dayjs.extend(relativeTime)
 
-function PostFeed({ post, deletePost, posts_id, newLike }) {
+function PostFeed({ post, deletePost, newLike }) {
 
     const [DeleteIconTrash, setDeleteIconTrash] = useState(false)
     const [dataComment, setDataComment] = useState([])
     const [showComments, setshowComments] = useState(false)
-    const [showLikes, setshowLikes] = useState(false)
+    const [showLikes, setShowLikes] = useState(false)
 
     // éxecuter le bloc de commentaires avec useEffect
 
@@ -54,20 +54,20 @@ function PostFeed({ post, deletePost, posts_id, newLike }) {
             setDeleteIconTrash(true)
         }
     }, [userId, post.users_id, userAdmin, dataComment])
-
+  
 
 
     // like Post
     const likeHandle = async data => {
         try {
-            const response = await api.get(`/${post.id}/like/${userId}`)
-            const { data } = await api.post("/likes", {
+            const response = await api.get(`/likes/${post.id}/like/${userId}`)
+            await api.post("/likes", {
                 users_id: userId,
-                posts_id: posts_id,
+                posts_id: post.id,
                 like: !response.data
             })
-            console.log(data.like);
-            newLike(data.like)
+            const countLikes = !response.data ? showLikes+1 : showLikes-1;
+            setShowLikes(countLikes)
         } catch (error) {
             console.log(error.message)
         }
@@ -76,8 +76,8 @@ function PostFeed({ post, deletePost, posts_id, newLike }) {
     async function loadLikes() {
         try {
             const { data } = await api.get(`/likes/posts/${post.id}`)
-            setshowLikes(data.length)
-            
+            setShowLikes(data.length)
+
         } catch (error) {
             console.log("error like")
         }
@@ -94,7 +94,7 @@ function PostFeed({ post, deletePost, posts_id, newLike }) {
                 </div>
                 <span className="time_post">{dayjs(post.createdAt).locale("fr").fromNow()}</span>
                 <div className="post-feed">
-                    {console.log(post)}<p className="text-post">{post.text_content}</p>
+                    <p className="text-post">{post.text_content}</p>
                     {post.imageUrl && (
                         <img
                             src={post.imageUrl}

@@ -22,7 +22,7 @@ function Header (){
     <header className="header">
     <div className="toolbar">
    <div className="logo_home">
-   <Link to = "/"><img src="../images/logo/icon-left-font.png" alt="Logo Goupomania"></img></Link>
+   <Link to = "/home"><img src="../images/logo/icon-left-font.png" alt="Logo Goupomania"></img></Link>
         </div>
         <div className="flex-items-header">
         <Link to = "/Profil"><Avatar src={user.avatar} className='avatar'/></Link>

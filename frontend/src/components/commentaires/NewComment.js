@@ -12,18 +12,15 @@ function NewComments({ posts_id, newComment }) {
   const { submitHandle } = useForm()
 
   const onSubmit = data => {
-    console.log(data)
       api.post("/comments", {
         users_id: userId,
         posts_id: posts_id,
         content: commentMessage,
       })
         .then(res => {
-          console.log("data comment", res.data)
           newComment(res.data.comment)
         })
         .catch(err => {
-          console.log(err)
         })
     }
 

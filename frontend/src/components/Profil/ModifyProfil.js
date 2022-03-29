@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { useForm } from "react-hook-form"
-import { useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import DeleteProfil from "./DeleteProfil";
-
+import api from "../../services/api"
 
 function ModifyProfil() {
 
@@ -17,11 +16,41 @@ function ModifyProfil() {
   // gérer l'image avatar
   const [avatarImage, setAvatarImage] = useState(null)
   const [file, setFile] = useState(false)
+  const [infoUser, setInfoUser] = useState({
+    prenom: "",
+    nom: "",
+    email: "",
+    avatar: ""
+  })
 
   const handleImage = e => {
     setAvatarImage(URL.createObjectURL(e.target.files[0]))
     setFile(e.target.files[0])
   }
+
+  async function loadUser() {
+    const userInfo = JSON.parse(localStorage.getItem("user"))
+    const id = userInfo.id
+   
+    try {
+      const { data } = await api.get(`auth/updateUser/${id}`)
+      setInfoUser({
+        prenom: data.prenom,
+        nom: data.nom,
+        email: data.email,
+        avatar: data.avatar
+      })
+      let user = JSON.stringify(data)
+      localStorage.setItem("user", user)
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  useEffect(() => {
+    loadUser()
+  }, [infoUser])
+
   const onSubmit = data => {
     console.log(data)
     const prenom = data.prenom
@@ -43,6 +72,7 @@ function ModifyProfil() {
       data = { users_id: id, avatar: data.avatar }
     }
 
+
     //axios PUT
     axios({
       method: "PUT",
@@ -60,7 +90,7 @@ function ModifyProfil() {
       },
     })
       .then(res => {
-        const userInfo = JSON.stringify(res.data.users)
+        const userInfo = JSON.stringify(res.data)
         localStorage.setItem("user", userInfo)
       })
       .catch(err => {
@@ -85,6 +115,8 @@ function ModifyProfil() {
           <br />
           <input
             type="text"
+            defaultValue={infoUser.prenom}
+            name="prenom"
             className="form-input"
             {...register("prenom", {
               minLength: {
@@ -105,8 +137,8 @@ function ModifyProfil() {
           <br />
           <input
             type="text"
+            defaultValue={infoUser.nom}
             className="form-input"
-
             {...register("nom", {
               minLength: {
                 value: 2,
@@ -126,7 +158,7 @@ function ModifyProfil() {
           <br />
           <input
             className="form-input"
-
+            defaultValue={infoUser.email}
             type="email"
             {...register("email", {
               message: "Vous devez entrer une adresse mail valide",

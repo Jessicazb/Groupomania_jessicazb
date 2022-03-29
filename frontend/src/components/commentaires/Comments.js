@@ -30,7 +30,6 @@ function Comments ({comments,commentDelete}){
         const data = await api.delete(`/comments/${id}`);
         commentDelete(data);
     } catch (error) {
-        console.log('erro')
     }
 }
 

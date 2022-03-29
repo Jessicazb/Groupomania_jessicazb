@@ -111,6 +111,14 @@ exports.deleteUser = async (req, res, next) => {
     return res.status(500).send({ error: "Erreur serveur" })
   }
 }
+
+exports.getUser = async (req, res, next) => {
+  User.findOne({ where: { id: req.params.id } })
+  .then((user) => res.status(200).json(user))
+  .catch((error) => res.status(500).json({ error:"Erreur serveur" }));
+}
+
+
 // création avatar user
 /*exports.createAvatar = async (req, res, next) => {
   try {

@@ -17,8 +17,6 @@ function Feed() {
         try {
             const { data } = await api.get("/posts");
             setPosts(data)
-            console.log("data 2")
-            console.log(data)
         } catch (error) {
             console.log('erro')
         }
