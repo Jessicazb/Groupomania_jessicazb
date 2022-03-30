@@ -25,7 +25,7 @@ function Header (){
         </div>
         <div className="flex-items-header">
         <Link to = "/Profil"><Avatar src={user.avatar} className='avatar'/></Link>
-        <span className='logout'>se déconnecter</span>
+        <span className='logout'>Logout</span>
         <Link to ="/sign-in"><ExitToAppIcon className='icon-logout'/></Link>
         </div>
 

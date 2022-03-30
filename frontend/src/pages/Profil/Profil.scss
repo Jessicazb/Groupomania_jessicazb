@@ -1,7 +1,7 @@
 @import "../../styles/settings.scss";
 .container-profil{
     background-color: $primary-color;
-    height: 533px;
+    height: 100vh;
 
 .form-profil{
     border: solid 2px;
@@ -57,3 +57,64 @@ label{
     cursor: pointer;
 }
 }
+
+@media screen and(min-width:768px) and(max-width:1024px) {
+    .container-profil{
+        .form-profil{
+            width: 70%;
+            margin-left: 120px;
+        
+     .avatar{
+         margin-left: 230px;
+         width: 11%;
+     }
+     .fichier-profil{
+         padding-left: 120px;
+     }
+    }
+    }
+  }
+  @media screen and(max-width:767px){
+    .container-profil{
+        .form-profil{
+            width: 70%;
+            margin-left: 120px;
+        
+     .avatar{
+         margin-left: 230px;
+         width: 11%;
+     }
+     .fichier-profil{
+         padding-left: 120px;
+     }
+    }
+    }
+  }
+  @media screen and(max-width:375px){
+    .container-profil{
+        .form-profil{
+            width: 95%;
+            margin-left: 10px;
+        
+     .avatar{
+         margin-left: 150px;
+         width: 16%;
+         height: 40;
+     }
+     .fichier-profil{
+         padding-left: 40px;
+     }
+     input{
+         margin-left: 15px;
+     }
+     label{
+         margin-left: 15px;
+     }
+    }
+    .supprimer-compte{
+        margin-left: 15px;
+    }
+    }
+  }
+  
+  
