@@ -60,7 +60,7 @@ function ModifyProfil() {
     const userInfo = JSON.parse(localStorage.getItem("user"))
     const id = userInfo.id
 
-    // téléchargement de l'image pour avatar
+    // upload imagem avatar
     if (file) {
       axios.defaults.headers.users = "multipart/form-data"
       data = new FormData()
@@ -92,6 +92,7 @@ function ModifyProfil() {
       .then(res => {
         const userInfo = JSON.stringify(res.data)
         localStorage.setItem("user", userInfo)
+        (window.confirm("Vos modifications ont bien été prise en compte!"))
       })
       .catch(err => {
         console.log(err)
