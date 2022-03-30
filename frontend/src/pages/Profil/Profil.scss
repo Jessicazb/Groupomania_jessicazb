@@ -1,17 +1,18 @@
+@import "../../styles/settings.scss";
 .container-profil{
-    background-color: #e6a199;
+    background-color: $primary-color;
     height: 533px;
 
 .form-profil{
     border: solid 2px;
     border-radius: 15px;
-    border-color:#d88a81;
+    border-color: $color-border-fond;
     width: 60%;
     height: 420px;
     margin-left: 230px;
     position: relative;
     top: 70px;
-    background-color: white;
+    background-color: $color-fond;
 .avatar{
     margin-left: 350px;
     margin-top: 30px;
@@ -36,14 +37,10 @@ input{
 }
 .button-profil{
     font-size: 16px;
-    color: white;
-    cursor: pointer;
-    background-color: rgb(233, 50, 50);
-    border: none;
-    border-radius: 5px;
+    @include button;
 }
 .button-profil:hover{
-    color: #d88a81;
+    color: $color-border-fond;
     background-color:black;
 }
 label{
