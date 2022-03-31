@@ -90,9 +90,10 @@ function ModifyProfil() {
       },
     })
       .then(res => {
-        const userInfo = JSON.stringify(res.data)
-        localStorage.setItem("user", userInfo)
-        (window.confirm("Vos modifications ont bien été prise en compte!"))
+        const userInfo = JSON.stringify(res.data.user);
+        localStorage.setItem("user", userInfo);
+        console.log(localStorage)
+        window.confirm("Vos modifications ont bien été prise en compte!")
       })
       .catch(err => {
         console.log(err)

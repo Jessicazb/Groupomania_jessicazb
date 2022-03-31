@@ -35,6 +35,7 @@ function Feed() {
             await api.delete(`/posts/${id}`);
             const data = posts.filter(post => post.id != id);
             setPosts(data);
+            window.location.reload();
         } catch (error) {
             console.log('erro')
         }
@@ -48,7 +49,7 @@ function Feed() {
                 <h1> Nouvelles publications:</h1>
 
                 {posts.map(post => (
-                    <div className="getAll-Post">
+                    <div className="getAll-Post" key={post.id}>
                         <PostFeed post={post} 
                         deletePost={()=>deletePost(post.id)} />
                     </div>

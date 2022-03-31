@@ -3,7 +3,7 @@ const Post = require('../models/post');
 const fs = require('fs');
 const User = require('../models/user');
 const { post } = require('../routes/post');
-//const Comments = require('../models/comments');
+const Comments = require('../models/comments');
 
 // création et ajout d'un post (POST)
 exports.createPost = async (req, res, next) => {
@@ -45,9 +45,13 @@ exports.deletePost = async (req, res, next) => {
     const post = await Post.findOne({where: {id: req.params.id}})
     console.log("Post trouvé :", post)
     if (post.imageUrl) {
-      const filename = post.imageUrl.split("/images")[1]
+      const filename = post.imageUrl.split("/images")[0]
       console.log("Filename to Delete", filename)
-      fs.unlink(`images/${filename}`, () => {
+      fs.unlink(`images/${filename}`, function(error) {
+        if(error){
+          throw error;
+        }
+        Comments.destroy({where : {posts_id:req.params.id}})
         Post.destroy({where: {id: req.params.id}})
         res.status(200).json({message: "Post et image supprimé"})
       })
