@@ -87,7 +87,7 @@ function PostFeed({ post, deletePost}) {
     return (
         <div>
             <div className="card-feed">
-                <div className="flex-avatar"><Avatar className="avatar-user"/>
+                <div className="flex-avatar"><Avatar className="avatar-user"></Avatar>
                     <h4 className="author-posts">{post.User.prenom} {post.User.nom}</h4>
                 </div>
                 <span className="time_post">{dayjs(post.createdAt).locale("fr").fromNow()}</span>
@@ -117,7 +117,7 @@ function PostFeed({ post, deletePost}) {
                 </div>
             
                 <div className="all-comments"><MessageIcon className="icon-message" />
-                <span className="p-comments">Commentaires</span>
+                <span className="p-comments">Commenter</span>
                     {showComments && dataComment.map((comments, i) => (
                         <Comments className="comments"
                             comments={comments}

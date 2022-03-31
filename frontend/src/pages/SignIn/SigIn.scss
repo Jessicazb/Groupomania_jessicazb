@@ -24,9 +24,59 @@ input{
     @include button;
     font-size: 16px;  
 }
+.button:hover{
+    @include button-hover;
+}
+.error-message{
+    font-size: 14px;
+    color: $secondary-color;
+}
 }
 .pos-form{
     margin-left: 50px;
+    
+p {
+    color: black;
+    font-weight: bolder;
 }
 }
 }
+}
+
+@media screen and(min-width:768px) and(max-width:1024px) {
+    .container{
+    .container-img{
+        display: none;
+    }
+    .container-form{
+        margin-left: 190px;
+        width: 100%;
+        .form-avatar{
+            padding-left: 60px;
+        }
+    }
+   }
+  }
+ 
+  @media screen and(max-width:375px){
+    .container{
+        .container-img{
+           display: none;
+        }
+        .container-form{
+            padding-left: 62px;
+        .form-avatar{
+            padding-left: 65px;
+        }
+        .connect-form{
+            width: 100%;
+            input{
+                width: 100%;
+            }
+        }.pos-form{
+            width: 100%;
+        }
+        }
+       }
+  }
+  

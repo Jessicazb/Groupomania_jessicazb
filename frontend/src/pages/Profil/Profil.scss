@@ -13,6 +13,7 @@
     position: relative;
     top: 70px;
     background-color: $color-fond;
+    box-shadow: 1.1px 1.1px 5px 1.1px $secondary-color;
 .avatar{
     margin-left: 350px;
     margin-top: 30px;
@@ -34,6 +35,7 @@ input{
     margin-bottom: 5px;
     border-radius: 5px;
     border: solid 1px;
+    padding-left: 5px;
 }
 .button-profil{
     font-size: 16px;

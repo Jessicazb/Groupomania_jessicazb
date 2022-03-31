@@ -1,6 +1,5 @@
 import React from "react"
 import { useState } from "react"
-import { useForm } from "react-hook-form"
 import SendIcon from '@material-ui/icons/Send';
 import api from "../../services/api";
 
@@ -9,7 +8,7 @@ function NewComments({ posts_id, newComment }) {
   const [commentMessage, setCommentMessage] = useState("");
   const [sendButton, setSendButton] = useState(false);
   const userId = JSON.parse(localStorage.getItem("user")).id
-  const { submitHandle } = useForm()
+  //const { submitHandle } = useForm()
 
   const onSubmit = data => {
       api.post("/comments", {

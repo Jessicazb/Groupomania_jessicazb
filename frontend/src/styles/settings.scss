@@ -29,10 +29,14 @@ $color-border-fond: #d88a81;
   color: $color-fond;
   cursor: pointer;
 }
-
+@mixin button-hover{
+  color: $color-border-fond;
+  background-color:black;
+}
 @mixin border-top {
   border-top: solid 1px;
   border-color:gray;
+  box-shadow: 0 0 1.1px 0 black;
 }
 
 @mixin container-img-login-inscription{

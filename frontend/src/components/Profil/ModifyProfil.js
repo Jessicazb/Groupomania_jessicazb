@@ -60,7 +60,7 @@ function ModifyProfil() {
     const userInfo = JSON.parse(localStorage.getItem("user"))
     const id = userInfo.id
 
-    // upload imagem avatar
+    // upload image avatar
     if (file) {
       axios.defaults.headers.users = "multipart/form-data"
       data = new FormData()
@@ -115,7 +115,7 @@ function ModifyProfil() {
             Prénom:
           </label>
           <br />
-          <input
+          <input 
             type="text"
             defaultValue={infoUser.prenom}
             name="prenom"

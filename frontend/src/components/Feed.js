@@ -7,7 +7,7 @@ import api from '../services/api';
 
 function Feed() {
     const [posts, setPosts] = useState([])
-    const [comments, setComments] = useState([])
+    //const [comments, setComments] = useState([])
     const Token = localStorage.getItem("Token")
     const user = localStorage.getItem('user')
     const userId = JSON.parse(user).id

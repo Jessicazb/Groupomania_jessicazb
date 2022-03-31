@@ -75,13 +75,13 @@ function SigIn() {
                     {/* password */}
                     <label htmlFor="password">Mot de passe:</label>
                     <br />
-                    <input
+                    <input 
                         type="password"
                         {...register("password", {
                             required: true,
                             pattern: {
                                 value: /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,64})$/,
-                                message:
+                                message: 
                                     "Vous devez entrer un mot de passe valide. Votre mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
                             },
                         })}
@@ -92,7 +92,7 @@ function SigIn() {
                     <span className="error-message">{errorData}</span>
                 </form>
                 <div className="pos-form">
-                <Link to = "/signup">Pas encore de compte?</Link>
+                <Link to = "/signup" style={{textDecoration:"none"}}><p>Pas encore de compte?</p></Link>
                 </div>
             </div>
         </div>
