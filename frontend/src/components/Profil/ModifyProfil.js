@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import axios from "axios"
 import { useForm } from "react-hook-form"
 import Avatar from '@material-ui/core/Avatar';
 import DeleteProfil from "./DeleteProfil";
@@ -31,9 +30,11 @@ function ModifyProfil() {
   async function loadUser() {
     const userInfo = JSON.parse(localStorage.getItem("user"))
     const id = userInfo.id
+    
 
     try {
       const { data } = await api.get(`auth/updateUser/${id}`)
+      setAvatarImage(data.avatar)
       setInfoUser({
         prenom: data.prenom,
         nom: data.nom,
@@ -52,44 +53,22 @@ function ModifyProfil() {
   }, [infoUser])
 
   const onSubmit = data => {
-    console.log(data)
     const prenom = data.prenom
     const nom = data.nom
     const email = data.email
-    const avatar = data.avatar
     const userInfo = JSON.parse(localStorage.getItem("user"))
     const id = userInfo.id
+    console.log(file)
 
+    data = new FormData()
+    data.append("prenom", prenom)
+    data.append("nom", nom)
+    data.append("email", email)
+    data.append("image", file)
     // upload image avatar
-    if (file) {
-      axios.defaults.headers.users = "multipart/form-data"
-      data = new FormData()
-      data.append("users_id", id)
-      data.append("avatar", file)
-    } else {
-      axios.defaults.headers.users =
-        "application/x-www-form-urlencoded"
-      data = { users_id: data.id, avatar: data.avatar }
-    }
-
-
-    //axios PUT
-    axios({
-      method: "PUT",
-      url: `http://localhost:4200/api/auth/updateUser?user=${id}`,
-      headers: {
-        "Authorization": localStorage.getItem("Token"),
-      },
-      params: { users_id: id },
-      data: {
-        id,
-        prenom,
-        nom,
-        email,
-        avatar,
-      },
-    })
+    api.put(`http://localhost:4200/api/auth/updateUser/${id}`, data)
       .then(res => {
+        console.log(res.data)
         const userInfo = JSON.stringify(res.data.user);
         localStorage.setItem("user", userInfo);
         console.log(localStorage)
@@ -104,7 +83,7 @@ function ModifyProfil() {
     <div onSubmit={handleSubmit(onSubmit)} className="container-profil">
       <form className="form">
         <div className="form-profil">
-        <Avatar className='avatar' src={avatarImage} alt="" />
+          <Avatar className='avatar' src={avatarImage} alt="" />
           <input className='fichier-profil'
             type="file"
             id="avatar"
@@ -116,7 +95,7 @@ function ModifyProfil() {
             Prénom:
           </label>
           <br />
-          <input 
+          <input
             type="text"
             defaultValue={infoUser.prenom}
             name="prenom"

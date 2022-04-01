@@ -49,6 +49,7 @@ exports.login = async (req, res, next) => {
         return res.status(401).json({ error: "Mot de passe incorrect !" })
       } else {
         res.status(200).json({
+          avatar: user.avatar ? `http://localhost:4200/images/${user.avatar}`: null,
           id: user.id,
           prenom: user.prenom,
           nom: user.nom,
@@ -69,17 +70,14 @@ exports.login = async (req, res, next) => {
 
 exports.updateUser = async (req, res, next) => {
   try {
-    let user = await User.findOne({ where: { id: req.body.id } })
+    let user = await User.findOne({ where: { id: req.params.id } })
     console.log("User trouvé : ", user.dataValues)
-    if(req.file){
-      let avatar = `${req.file.filename}`
       if (req.file) {
         console.log("filename", req.file.filename)
-        user.avatar = req.body.avatar
+        user.avatar = req.file.filename
       } else {
-        avatar = null
-      }
-    }
+        user.avatar = null
+      } 
     if (req.body.email) {
       user.email = req.body.email
       console.log("Ancien email : ", user.email)
@@ -123,7 +121,9 @@ exports.deleteUser = async (req, res, next) => {
 
 exports.getUser = async (req, res, next) => {
   User.findOne({ where: { id: req.params.id } })
-  .then((user) => res.status(200).json(user))
+  .then((user) =>{ 
+  user.avatar= `http://localhost:4200/images/${user.avatar}`
+  res.status(200).json(user)}) 
   .catch((error) => res.status(500).json({ error:"Erreur serveur" }));
 }
 

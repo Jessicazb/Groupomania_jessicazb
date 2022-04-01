@@ -74,12 +74,13 @@ exports.getAllPost = (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ["prenom", "nom", "id"],
+          attributes: ["avatar", "prenom", "nom", "id"],
         },
       ],
     }).then(posts => {
       posts.map(post => {
-      if( post.imageUrl) post.imageUrl = `http://localhost:4200/images/${post.imageUrl}` 
+      if( post.imageUrl) post.imageUrl = `http://localhost:4200/images/${post.imageUrl}`
+      if(post.User.avatar) post.User.avatar = `http://localhost:4200/images/${post.User.avatar}`
       });
       res.json(posts)
     })

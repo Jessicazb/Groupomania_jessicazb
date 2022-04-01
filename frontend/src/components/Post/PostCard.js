@@ -60,7 +60,7 @@ function PostCard (props){
     <div>
     <form onSubmit={handleSubmit(onSubmit)} className="post-form">
       <div className="haeder-post">
-      <Avatar className='avatar'/>
+      <Avatar className='avatar' src={JSON.parse(localStorage.getItem("user")).avatar}/>
         <br />
         <textarea
           row={2}

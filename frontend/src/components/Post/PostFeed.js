@@ -87,7 +87,7 @@ function PostFeed({ post, deletePost}) {
     return (
         <div>
             <div className="card-feed">
-                <div className="flex-avatar"><Avatar className="avatar-user"></Avatar>
+                <div className="flex-avatar"><Avatar className="avatar-user" src={post.User.avatar}/>
                     <h4 className="author-posts">{post.User.prenom} {post.User.nom}</h4>
                 </div>
                 <span className="time_post">{dayjs(post.createdAt).locale("fr").fromNow()}</span>

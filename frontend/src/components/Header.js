@@ -13,10 +13,8 @@ function Header (){
     },[]);
 
     // authentification user/avatar
-    const user = localStorage.getItem('user');
-    if (user) {
-        
-    } 
+    const user = JSON.parse(localStorage.getItem("user"));
+    
     return (
     <header className="header">
     <div className="toolbar">
