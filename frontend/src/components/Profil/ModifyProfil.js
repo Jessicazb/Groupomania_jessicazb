@@ -30,8 +30,7 @@ function ModifyProfil() {
   async function loadUser() {
     const userInfo = JSON.parse(localStorage.getItem("user"))
     const id = userInfo.id
-    
-
+  
     try {
       const { data } = await api.get(`auth/updateUser/${id}`)
       setAvatarImage(data.avatar)
@@ -64,7 +63,10 @@ function ModifyProfil() {
     data.append("prenom", prenom)
     data.append("nom", nom)
     data.append("email", email)
-    data.append("image", file)
+    if(file){
+      data.append("image", file)
+    }
+
     // upload image avatar
     api.put(`http://localhost:4200/api/auth/updateUser/${id}`, data)
       .then(res => {

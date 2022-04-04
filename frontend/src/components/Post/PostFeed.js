@@ -77,7 +77,7 @@ function PostFeed({ post, deletePost}) {
             setShowLikes(data.length)
 
         } catch (error) {
-            console.log("error like")
+            //console.log("error like")
         }
     }
     useEffect(() => {

@@ -197,16 +197,21 @@ h1{
 .card-comments{
     @include border-top;
     margin-top: 10px;
+.card-comments-header{ 
+    display: flex;  
+.avatar-comments{
+ margin-top: 10px;
+ margin-left: 5px;
+}
 .author-comments{
     padding-left: 10px;
-    padding-top: 10px;
+    padding-top: 20px;
     font-weight: bolder;
 }
+}
 .comments-text-p{
-    padding-top: 10px;
-    padding-left: 10px;
+    padding-left: 55px;
     padding-bottom: 5px;
-
 }
 .delete-icon-comments{
     cursor: pointer;

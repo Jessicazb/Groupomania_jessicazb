@@ -75,8 +75,6 @@ exports.updateUser = async (req, res, next) => {
       if (req.file) {
         console.log("filename", req.file.filename)
         user.avatar = req.file.filename
-      } else {
-        user.avatar = null
       } 
     if (req.body.email) {
       user.email = req.body.email

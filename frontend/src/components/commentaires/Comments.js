@@ -31,13 +31,11 @@ function Comments ({comments,commentDelete}){
         commentDelete(data);
     } catch (error) {
     }
-}
-
-  
+} 
 return(
     <div className="card-comments">
     <div className="card-comments-header">
-    {/*<Avatar src ={comments.author.imageUrl}/>*/}
+    <Avatar className="avatar-comments" src={comments.User.avatar}/>
     <p className="author-comments">{comments.User.prenom} {comments.User.nom}</p>
     </div>
     <div className="comments-text">

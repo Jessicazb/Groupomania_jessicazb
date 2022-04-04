@@ -33,10 +33,14 @@ exports.createComment = async (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ["prenom", "nom", "id"],
+          attributes: ["prenom", "nom", "id", "avatar"],
         }
       ]
     })
-      .then((comments) => res.status(200).json(comments))
+      .then((comments) => {
+        comments.map(comment =>{
+          if(comment.User.avatar) comment.User.avatar = `http://localhost:4200/images/${comment.User.avatar}`
+        }) 
+        res.status(200).json(comments)})
       .catch((error) => res.status(404).json({ error }));
   };
