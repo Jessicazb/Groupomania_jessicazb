@@ -13,14 +13,12 @@ require("dayjs/locale/fr")
 const relativeTime = require("dayjs/plugin/relativeTime")
 dayjs.extend(relativeTime)
 
-function PostFeed({ post, deletePost}) {
+function PostFeed({ post, deletePost }) {
 
     const [DeleteIconTrash, setDeleteIconTrash] = useState(false)
     const [dataComment, setDataComment] = useState([])
     const [showComments, setshowComments] = useState(false)
     const [showLikes, setShowLikes] = useState(false)
-
-    // éxecuter le bloc de commentaires avec useEffect
 
     const addComment = newComment => {
         setDataComment(prevState => {
@@ -32,7 +30,7 @@ function PostFeed({ post, deletePost}) {
         setDataComment(updateComment)
     }
 
-    // récuperatio  des données dans le local storage
+    // récuperation  des données dans le local storage
     const user = JSON.parse(localStorage.getItem("user"))
     const userId = user.id
     const userAdmin = user.admin
@@ -42,19 +40,22 @@ function PostFeed({ post, deletePost}) {
             const { data } = await api.get(`/comments?id=${post.id}`)
             setDataComment(data)
             setshowComments(data.length > 0)
+            return data;
         } catch (error) {
+            return false;
         }
     }
     // userId ou userAdmin peuvent deleter le post
     useEffect(() => {
-        loadComments();
-        if (post.users_id === userId || userAdmin) {
-            setDeleteIconTrash(true)
-        }
-    }, [userId, post.users_id, userAdmin, dataComment])
-  
-
-
+        let isMounted = true;
+        loadComments().then(data => {
+            if (post.users_id === userId || userAdmin) {
+                setDeleteIconTrash(true)
+            }
+        })
+        return () => { isMounted = false };
+    }, [userId, post.users_id, userAdmin, dataComment]);
+    
     // like Post
     const likeHandle = async data => {
         try {
@@ -64,7 +65,7 @@ function PostFeed({ post, deletePost}) {
                 posts_id: post.id,
                 like: !response.data
             })
-            const countLikes = !response.data ? showLikes+1 : showLikes-1;
+            const countLikes = !response.data ? showLikes + 1 : showLikes - 1;
             setShowLikes(countLikes)
         } catch (error) {
             console.log(error.message)
@@ -75,19 +76,23 @@ function PostFeed({ post, deletePost}) {
         try {
             const { data } = await api.get(`/likes/posts/${post.id}`)
             setShowLikes(data.length)
-
+            return data;
         } catch (error) {
-            //console.log("error like")
+            return false;
         }
     }
+
     useEffect(() => {
-        loadLikes();
-    }, [userId, post.users_id, showLikes])
+        let isMounted = true;
+        loadLikes().then(data => {
+        })
+        return () => { isMounted = false };
+    }, [userId, post.users_id, showLikes]);
 
     return (
         <div>
             <div className="card-feed">
-                <div className="flex-avatar"><Avatar className="avatar-user" src={post.User.avatar}/>
+                <div className="flex-avatar"><Avatar className="avatar-user" src={post.User.avatar} />
                     <h4 className="author-posts">{post.User.prenom} {post.User.nom}</h4>
                 </div>
                 <span className="time_post">{dayjs(post.createdAt).locale("fr").fromNow()}</span>
@@ -115,9 +120,9 @@ function PostFeed({ post, deletePost}) {
                         )}
                     </span>
                 </div>
-            
+
                 <div className="all-comments"><MessageIcon className="icon-message" />
-                <span className="p-comments">Commenter</span>
+                    <span className="p-comments">Commenter</span>
                     {showComments && dataComment.map((comments, i) => (
                         <Comments className="comments"
                             comments={comments}

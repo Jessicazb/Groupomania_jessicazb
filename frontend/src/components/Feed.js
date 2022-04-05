@@ -4,27 +4,22 @@ import PostCard from '../components/Post/PostCard';
 import PostFeed from '../components/Post/PostFeed';
 import api from '../services/api';
 
-
 function Feed() {
     const [posts, setPosts] = useState([])
-    //const [comments, setComments] = useState([])
     const Token = localStorage.getItem("Token")
     const user = localStorage.getItem('user')
     const userId = JSON.parse(user).id
 
-
     async function loadPosts() {
         try {
+            // récuperation de tous les posts
             const { data } = await api.get("/posts");
             setPosts(data)
-            console.log("==========")
-            console.log(data)
         } catch (error) {
             console.log('erro')
         }
     }
     useEffect(() => {
-        // récuperation de tous les posts
         loadPosts()
     }, [Token, setPosts, userId])
     const addnewpost = () => {
@@ -52,8 +47,8 @@ function Feed() {
 
                 {posts.map(post => (
                     <div className="getAll-Post" key={post.id}>
-                        <PostFeed post={post} 
-                        deletePost={()=>deletePost(post.id)} />
+                        <PostFeed post={post}
+                            deletePost={() => deletePost(post.id)} />
                     </div>
                 ))}
 

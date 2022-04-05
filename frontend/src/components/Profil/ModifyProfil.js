@@ -30,7 +30,6 @@ function ModifyProfil() {
   async function loadUser() {
     const userInfo = JSON.parse(localStorage.getItem("user"))
     const id = userInfo.id
-  
     try {
       const { data } = await api.get(`auth/updateUser/${id}`)
       setAvatarImage(data.avatar)
@@ -42,14 +41,19 @@ function ModifyProfil() {
       })
       let user = JSON.stringify(data)
       localStorage.setItem("user", user)
+      return user;
     } catch (error) {
       console.log(error.message);
+      return false;
     }
   }
-
+ 
   useEffect(() => {
-    loadUser()
-  }, [infoUser])
+    let isMounted = true;
+    loadUser().then(data => {
+    })
+    return () => { isMounted = false };
+  },[infoUser]); 
 
   const onSubmit = data => {
     const prenom = data.prenom
@@ -57,17 +61,15 @@ function ModifyProfil() {
     const email = data.email
     const userInfo = JSON.parse(localStorage.getItem("user"))
     const id = userInfo.id
-    console.log(file)
 
     data = new FormData()
     data.append("prenom", prenom)
     data.append("nom", nom)
     data.append("email", email)
-    if(file){
+    if (file) {
       data.append("image", file)
     }
 
-    // upload image avatar
     api.put(`http://localhost:4200/api/auth/updateUser/${id}`, data)
       .then(res => {
         console.log(res.data)

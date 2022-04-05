@@ -1,34 +1,34 @@
-import React, {useState, useEffect}from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-function Header (){
+function Header() {
     const [userLogout, setUserLogout] = useState({});
-    const logout = () =>{
+    const logout = () => {
         window.location.reload();
     }
-    useEffect(()=>{
+    useEffect(() => {
         setUserLogout(JSON.parse(localStorage.getItem('user')));
-    },[]);
+    }, []);
 
     // authentification user/avatar
     const user = JSON.parse(localStorage.getItem("user"));
-    
-    return (
-    <header className="header">
-    <div className="toolbar">
-   <div className="logo_home">
-   <Link to = "/home"><img src="../images/logo/icon-left-font.png" alt="Logo Goupomania"></img></Link>
-        </div>
-        <div className="flex-items-header">
-        <Link to = "/Profil"><Avatar src={user.avatar} className='avatar'/></Link>
-        <span className='logout'>Logout</span>
-        <Link to ="/sign-in"><ExitToAppIcon className='icon-logout'/></Link>
-        </div>
 
-    </div>
-</header>
+    return (
+        <header className="header">
+            <div className="toolbar">
+                <div className="logo_home">
+                    <Link to="/home"><img src="../images/logo/icon-left-font.png" alt="Logo Goupomania"></img></Link>
+                </div>
+                <div className="flex-items-header">
+                    <Link to="/Profil"><Avatar src={user.avatar} className='avatar' /></Link>
+                    <span className='logout'>Logout</span>
+                    <Link to="/sign-in"><ExitToAppIcon className='icon-logout' /></Link>
+                </div>
+
+            </div>
+        </header>
     );
 };
 

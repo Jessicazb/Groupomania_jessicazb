@@ -1,10 +1,10 @@
-import axios from "axios"
 import './SignUp.scss';
 import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useState } from "react"
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import api from "../../services/api";
 
 function SignUp () {
     // useState
@@ -22,20 +22,15 @@ function SignUp () {
 
     // axios
     const onSubmit = data => {
-        axios({
-            method: "POST",
-            url: `http://localhost:4200/api/auth/signup`,
-            data: {
+        api.post("/auth/signup", {
                 prenom: data.prenom,
                 nom: data.nom,
                 email: data.email,
                 password: data.password,
-            },
         })
             .then(res => {
                 localStorage.clear();
-                navigate("/sign-in")
-                  
+                navigate("/sign-in")     
             })
             .catch(error => {
                 console.log(error)
