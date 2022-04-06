@@ -41,19 +41,15 @@ function PostFeed({ post, deletePost }) {
             const { data } = await api.get(`/comments?id=${post.id}`)
             setDataComment(data)
             setshowComments(data.length > 0)
-            return data;
         } catch (error) {
-            return false;
         }
     }
     useEffect(() => {
-        let isMounted = true;
-        loadComments().then(data => {
+        loadComments();
             if (post.users_id === userId || userAdmin) {
                 setDeleteIconTrash(true)
             } 
-        })
-        return () => { isMounted = false };
+        
     }, [userId, post.users_id, userAdmin, dataComment]);
 
     // like Posts
@@ -76,18 +72,13 @@ function PostFeed({ post, deletePost }) {
         try {
             const { data } = await api.get(`/likes/posts/${post.id}`)
             setShowLikes(data.length)
-            return data;
         } catch (error) {
-            return false;
         }
     }
 
     useEffect(() => {
-        let isMounted = true;
-        loadLikes().then(data => {
-        }) 
-        return () => { isMounted = false };
-    }, [userId, post.users_id, showLikes]);
+        loadLikes();
+    }, [userId, post.users_id, showLikes])
    
     return (
         <div>

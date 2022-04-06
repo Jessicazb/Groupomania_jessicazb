@@ -44,18 +44,13 @@ function ModifyProfil() {
       })
       let user = JSON.stringify(data)
       localStorage.setItem("user", user)
-      return user;
     } catch (error) {
       console.log(error.message);
-      return false;
     }
   }
 
   useEffect(() => {
-    let isMounted = true;
-    loadUser().then(data => {
-    })
-    return () => { isMounted = false };
+    loadUser();
   }, [infoUser]);
 
   const onSubmit = data => {
