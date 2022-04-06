@@ -1,7 +1,7 @@
 # Jessica_Azevedo_de_Brito_7_31082021-
 Création d'un réseau social d'entreprise nommé Groupomania!
 
-Les technologies utilisés :
+Technologies utilisées :
 
 FRONT :
 
