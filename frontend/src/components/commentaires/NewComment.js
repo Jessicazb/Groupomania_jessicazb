@@ -8,20 +8,19 @@ function NewComments({ posts_id, newComment }) {
   const [commentMessage, setCommentMessage] = useState("");
   const [sendButton, setSendButton] = useState(false);
   const userId = JSON.parse(localStorage.getItem("user")).id
-  //const { submitHandle } = useForm()
 
   const onSubmit = data => {
-      api.post("/comments", {
-        users_id: userId,
-        posts_id: posts_id,
-        content: commentMessage,
+    api.post("/comments", {
+      users_id: userId,
+      posts_id: posts_id,
+      content: commentMessage,
+    })
+      .then(res => {
+        newComment(res.data.comment)
       })
-        .then(res => {
-          newComment(res.data.comment)
-        })
-        .catch(err => {
-        })
-    }
+      .catch(err => {
+      })
+  }
 
 
   return (

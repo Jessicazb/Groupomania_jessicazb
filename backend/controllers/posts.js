@@ -1,8 +1,8 @@
 // Logique métier de routes 
-const Post = require('../models/post');
+const Post = require('../models/posts');
 const fs = require('fs');
-const User = require('../models/user');
-const { post } = require('../routes/post');
+const User = require('../models/users');
+const { post } = require('../routes/posts');
 const Comments = require('../models/comments');
 
 // création et ajout d'un post (POST)

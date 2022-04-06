@@ -6,9 +6,9 @@ import './Profil.scss'
 function Profil() {
     return (
         <div>
-        <Header />
-        <div className="toolbar"></div>   
-        <ModifyProfil />
+            <Header />
+            <div className="toolbar"></div>
+            <ModifyProfil />
         </div>
     );
 };

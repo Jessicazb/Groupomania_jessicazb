@@ -6,11 +6,11 @@ import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import api from "../../services/api";
 
-function SignUp () {
+function SignUp() {
     // useState
     const [errorData, setErrorData] = useState("")
 
-    // register
+    // gestion du formulaire avec useForm
     const {
         register,
         handleSubmit,
@@ -20,17 +20,17 @@ function SignUp () {
     // navigate
     const navigate = useNavigate()
 
-    // axios
+    // inscription POST 
     const onSubmit = data => {
         api.post("/auth/signup", {
-                prenom: data.prenom,
-                nom: data.nom,
-                email: data.email,
-                password: data.password,
+            prenom: data.prenom,
+            nom: data.nom,
+            email: data.email,
+            password: data.password,
         })
             .then(res => {
                 localStorage.clear();
-                navigate("/sign-in")     
+                navigate("/sign-in")
             })
             .catch(error => {
                 console.log(error)
@@ -52,77 +52,77 @@ function SignUp () {
                     </Avatar>
                     <h3>Inscription</h3>
                 </div>
-            <form onSubmit={handleSubmit(onSubmit)} className="inscription-form">
-                {/* prenom */}
-                <label htmlFor="prenom">Prenom:</label>
-                <br />
-                <input
-                    {...register("prenom", {
-                        required: true,
-                        minLength: {
-                            value: 2,
-                            message: "Vous devez entrer au moins 2 caractères",
-                        },
-                        maxLength: {
-                            value: 10,
-                            message: "Vous devez entrer au maximum 10 caractères",
-                        },
-                    })}
-                />
-                {errors.prenom && <span>{errors.prenom.message}</span>}
-                <br />
-                {/* nom */}
-                <label htmlFor="nom">Nom:</label>
-                <br />
-                <input
-                    type="text"
-                    {...register("nom", {
-                        required: true,
-                        minLength: {
-                            value: 2,
-                            message: "Vous devez entrer au moins 2 caractères",
-                        },
-                        maxLength: {
-                            value: 10,
-                            message: "Vous devez entrer au maximum 10 caractères",
-                        },
-                    })}
-                />
-                {errors.nom && <span>{errors.nom.message}</span>}
-                <br />
-                {/* email */}
-                <label htmlFor="email">Email:</label>
-                <br />
-                <input
-                    type="email"
-                    {...register("email", {
-                        required: true,
-                        message: "Vous devez entrer une adresse mail valide",
-                    })}
-                />
-                {errors.email && <span>{errors.email.message}</span>}
-                <br />
-                {/* password */}
-                <label htmlFor="password">Mot de passe:</label>
-                <br />
-                <input
-                    type="password"
-                    {...register("password", {
-                        required: true,
-                        pattern: {
-                            value: /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,64})$/,
-                            message:
-                                "Votre mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
-                        },
-                    })}
-                />
-                {errors.password && <span>{errors.password.message}</span>}
-                <br />
-                <input type="submit" value="Inscription" className="button" />
-                <span className="error-message">{errorData}</span>{" "}
-            </form>
+                <form onSubmit={handleSubmit(onSubmit)} className="inscription-form">
+                    {/* prenom */}
+                    <label htmlFor="prenom">Prenom:</label>
+                    <br />
+                    <input
+                        {...register("prenom", {
+                            required: true,
+                            minLength: {
+                                value: 2,
+                                message: "Vous devez entrer au moins 2 caractères",
+                            },
+                            maxLength: {
+                                value: 10,
+                                message: "Vous devez entrer au maximum 10 caractères",
+                            },
+                        })}
+                    />
+                    {errors.prenom && <span>{errors.prenom.message}</span>}
+                    <br />
+                    {/* nom */}
+                    <label htmlFor="nom">Nom:</label>
+                    <br />
+                    <input
+                        type="text"
+                        {...register("nom", {
+                            required: true,
+                            minLength: {
+                                value: 2,
+                                message: "Vous devez entrer au moins 2 caractères",
+                            },
+                            maxLength: {
+                                value: 10,
+                                message: "Vous devez entrer au maximum 10 caractères",
+                            },
+                        })}
+                    />
+                    {errors.nom && <span>{errors.nom.message}</span>}
+                    <br />
+                    {/* email */}
+                    <label htmlFor="email">Email:</label>
+                    <br />
+                    <input
+                        type="email"
+                        {...register("email", {
+                            required: true,
+                            message: "Vous devez entrer une adresse mail valide",
+                        })}
+                    />
+                    {errors.email && <span>{errors.email.message}</span>}
+                    <br />
+                    {/* password */}
+                    <label htmlFor="password">Mot de passe:</label>
+                    <br />
+                    <input
+                        type="password"
+                        {...register("password", {
+                            required: true,
+                            pattern: {
+                                value: /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,64})$/,
+                                message:
+                                    "Votre mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
+                            },
+                        })}
+                    />
+                    {errors.password && <span>{errors.password.message}</span>}
+                    <br />
+                    <input type="submit" value="Inscription" className="button" />
+                    <span className="error-message">{errorData}</span>{" "}
+                </form>
+            </div>
         </div>
-    </div>
     )
 }
 

@@ -2,8 +2,8 @@
 const Sequelize = require('sequelize');
 const configDB = require('../config/db');
 
-const User = require('../models/user');
-const Posts = require('../models/post');
+const User = require('../models/users');
+const Posts = require('../models/posts');
 const Comments = require('../models/comments');
 const Likes = require('../models/likes');
 

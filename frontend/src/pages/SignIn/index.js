@@ -2,10 +2,10 @@ import React from "react";
 import './SigIn.scss';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import api from "../../services/api";
 
 
@@ -19,15 +19,15 @@ function SigIn() {
         handleSubmit,
         formState: { errors },
     } = useForm()
-
-    useEffect(()=>{
+   
+    useEffect(() => {
         localStorage.clear()
-    },[])
+    }, []) 
     // usenavigate
     const navigate = useNavigate()
 
-     const onSubmit = data => {
-        // axios
+    const onSubmit = data => {
+        // connection POST
         api.post("/auth/login", {
             email: data.email,
             password: data.password
@@ -46,7 +46,7 @@ function SigIn() {
                 setErrorData("Vous n'êtes pas inscrit!")
             })
     }
-     return (
+    return (
         <div className="container">
             <div className="container-img">
                 <img src="./images/logo/icon.png" alt="Logo Goupomania"></img>
@@ -75,13 +75,13 @@ function SigIn() {
                     {/* password */}
                     <label htmlFor="password">Mot de passe:</label>
                     <br />
-                    <input 
+                    <input
                         type="password"
                         {...register("password", {
                             required: true,
                             pattern: {
                                 value: /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,64})$/,
-                                message: 
+                                message:
                                     "Vous devez entrer un mot de passe valide. Votre mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
                             },
                         })}
@@ -92,7 +92,7 @@ function SigIn() {
                     <span className="error-message">{errorData}</span>
                 </form>
                 <div className="pos-form">
-                <Link to = "/signup" style={{textDecoration:"none"}}><p>Pas encore de compte?</p></Link>
+                    <Link to="/signup" style={{ textDecoration: "none" }}><p>Pas encore de compte?</p></Link>
                 </div>
             </div>
         </div>

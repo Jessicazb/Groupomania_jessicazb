@@ -1,6 +1,7 @@
-const Post = require('../models/post');
+const Post = require('../models/posts');
 const Like = require('../models/likes');
 
+// création d'un like
 exports.createLike = (req, res, next) => {
   const userId = req.body.users_id;
   const isliked = req.body.like;

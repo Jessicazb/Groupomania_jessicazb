@@ -35,6 +35,7 @@ function PostFeed({ post, deletePost }) {
     const userId = user.id
     const userAdmin = user.admin
 
+    // get comments
     async function loadComments() {
         try {
             const { data } = await api.get(`/comments?id=${post.id}`)
@@ -45,18 +46,17 @@ function PostFeed({ post, deletePost }) {
             return false;
         }
     }
-    // userId ou userAdmin peuvent deleter le post
     useEffect(() => {
         let isMounted = true;
         loadComments().then(data => {
             if (post.users_id === userId || userAdmin) {
                 setDeleteIconTrash(true)
-            }
+            } 
         })
         return () => { isMounted = false };
     }, [userId, post.users_id, userAdmin, dataComment]);
-    
-    // like Post
+
+    // like Posts
     const likeHandle = async data => {
         try {
             const response = await api.get(`/likes/${post.id}/like/${userId}`)
@@ -71,7 +71,7 @@ function PostFeed({ post, deletePost }) {
             console.log(error.message)
         }
     }
-    // get like
+    // get likes
     async function loadLikes() {
         try {
             const { data } = await api.get(`/likes/posts/${post.id}`)
@@ -85,10 +85,10 @@ function PostFeed({ post, deletePost }) {
     useEffect(() => {
         let isMounted = true;
         loadLikes().then(data => {
-        })
+        }) 
         return () => { isMounted = false };
     }, [userId, post.users_id, showLikes]);
-
+   
     return (
         <div>
             <div className="card-feed">

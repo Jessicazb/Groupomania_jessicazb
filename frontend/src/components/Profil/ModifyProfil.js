@@ -6,6 +6,7 @@ import api from "../../services/api"
 
 function ModifyProfil() {
 
+  // gestion du formulaire avec useForm
   const {
     register,
     handleSubmit,
@@ -30,6 +31,8 @@ function ModifyProfil() {
   async function loadUser() {
     const userInfo = JSON.parse(localStorage.getItem("user"))
     const id = userInfo.id
+
+    // récuperation des informations utilisateurs
     try {
       const { data } = await api.get(`auth/updateUser/${id}`)
       setAvatarImage(data.avatar)
@@ -47,13 +50,13 @@ function ModifyProfil() {
       return false;
     }
   }
- 
+
   useEffect(() => {
     let isMounted = true;
     loadUser().then(data => {
     })
     return () => { isMounted = false };
-  },[infoUser]); 
+  }, [infoUser]);
 
   const onSubmit = data => {
     const prenom = data.prenom
@@ -69,7 +72,7 @@ function ModifyProfil() {
     if (file) {
       data.append("image", file)
     }
-
+    // mise à jour du profil utilisateur
     api.put(`http://localhost:4200/api/auth/updateUser/${id}`, data)
       .then(res => {
         console.log(res.data)

@@ -15,7 +15,7 @@ module.exports = async (req, res, next) => {
       'RANDOM_TOKEN_SECRET'
     );
 
-    req.auth = { userId:decoded.userId }; 
+    req.auth = { userId: decoded.userId };
 
     return next();
   } catch (err) {

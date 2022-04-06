@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt');
 // package pour la création de token d'authentification
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+const User = require('../models/users');
 
 // création d'un compte
 exports.signup = async (req, res, next) => {
@@ -66,8 +66,8 @@ exports.login = async (req, res, next) => {
     return res.status(500).send({ error: "Erreur serveur" })
   }
 };
-//modification d'un compte
 
+//modification d'un compte
 exports.updateUser = async (req, res, next) => {
   try {
     let user = await User.findOne({ where: { id: req.params.id } })
@@ -117,6 +117,7 @@ exports.deleteUser = async (req, res, next) => {
   }
 }
 
+// tous les utilisateur
 exports.getUser = async (req, res, next) => {
   User.findOne({ where: { id: req.params.id } })
   .then((user) =>{ 

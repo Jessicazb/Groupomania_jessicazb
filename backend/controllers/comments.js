@@ -1,5 +1,5 @@
 const Comment = require('../models/comments')
-const User = require('../models/user');
+const User = require('../models/users');
 
 // création d'un commentaire
 exports.createComment = async (req, res, next) => {
@@ -27,6 +27,7 @@ exports.createComment = async (req, res, next) => {
     const comment = await Comment.destroy({where: {id: req.params.id}})
     res.status(200).json({comment, message: "Commentaire supprimé"})
   }
+  // tous les commentaires
   exports.getComment = (req, res, next) => {
     Comment.findAll({ 
       where: { posts_id: req.query.id },
