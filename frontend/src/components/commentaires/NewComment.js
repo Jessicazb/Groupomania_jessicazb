@@ -17,6 +17,7 @@ function NewComments({ posts_id, newComment }) {
     })
       .then(res => {
         newComment(res.data.comment)
+        window.location.reload()
       })
       .catch(err => {
       })

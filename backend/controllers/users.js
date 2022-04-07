@@ -74,7 +74,7 @@ exports.updateUser = async (req, res, next) => {
     console.log("User trouvé : ", user.dataValues)
       if (req.file) {
         console.log("filename", req.file.filename)
-        user.avatar = req.file.filename
+        user.avatar = req.file.filename 
       } 
     if (req.body.email) {
       user.email = req.body.email

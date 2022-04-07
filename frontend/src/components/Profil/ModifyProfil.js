@@ -51,7 +51,7 @@ function ModifyProfil() {
 
   useEffect(() => {
     loadUser();
-  }, [infoUser]);
+  }, []);
 
   const onSubmit = data => {
     const prenom = data.prenom
@@ -70,11 +70,11 @@ function ModifyProfil() {
     // mise à jour du profil utilisateur
     api.put(`http://localhost:4200/api/auth/updateUser/${id}`, data)
       .then(res => {
-        console.log(res.data)
         const userInfo = JSON.stringify(res.data.user);
         localStorage.setItem("user", userInfo);
         console.log(localStorage)
         window.confirm("Vos modifications ont bien été prise en compte!")
+        window.location.reload()
       })
       .catch(err => {
         console.log(err)

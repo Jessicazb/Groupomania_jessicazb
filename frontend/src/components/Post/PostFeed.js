@@ -50,7 +50,7 @@ function PostFeed({ post, deletePost }) {
                 setDeleteIconTrash(true)
             } 
         
-    }, [userId, post.users_id, userAdmin, dataComment]);
+    }, []);
 
     // like Posts
     const likeHandle = async data => {
@@ -78,7 +78,7 @@ function PostFeed({ post, deletePost }) {
 
     useEffect(() => {
         loadLikes();
-    }, [userId, post.users_id, showLikes])
+    }, [])
    
     return (
         <div>

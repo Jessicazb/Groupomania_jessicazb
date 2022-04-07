@@ -29,6 +29,7 @@ function Comments({ comments, commentDelete }) {
     try {
       const data = await api.delete(`/comments/${id}`);
       commentDelete(data);
+      window.location.reload()
     } catch (error) {
     }
   }
