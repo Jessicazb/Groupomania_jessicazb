@@ -24,7 +24,7 @@ function Comments({ comments, commentDelete }) {
     }
   }, [userId, userAdmin])
 
-  // delete comment
+  // Delete comment
   async function deleteComment(id) {
     try {
       const data = await api.delete(`/comments/${id}`);
